@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tryzeon-bg: #F8F5F1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--tryzeon-bg);
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-md bg-white/10 border-b border-white/20 shadow-sm;
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}

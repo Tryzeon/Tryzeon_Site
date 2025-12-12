@@ -1,0 +1,138 @@
+'use client';
+
+import React from 'react';
+import { MessageCircle, Instagram, Mail } from 'lucide-react';
+import Link from 'next/link';
+
+interface FooterProps {
+  t: {
+    footer: {
+      products: string;
+      aiVirtualTryOn: string;
+      videoGeneration: string;
+      aiRecommendation: string;
+      dataAnalytics: string;
+      contactUs: string;
+      businessCooperation: string;
+      technicalSupport: string;
+      mediaContact: string;
+      privacyPolicy: string;
+      termsOfService: string;
+      cookiePolicy: string;
+      copyright: string;
+    };
+  };
+}
+
+export function Footer({ t }: FooterProps) {
+  return (
+    <footer className="bg-gray-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Brand Section */}
+          <div className="col-span-1 md:col-span-2">
+            <h3 className="text-2xl font-bold mb-2">Tryzeon</h3>
+            <p className="text-sm text-gray-400 mb-4">創然科技股份有限公司</p>
+            <p className="text-gray-300 mb-4 max-w-md">
+              AI × 時尚科技新創，專注於虛擬試穿技術，連結創作者與品牌，打造全球性時尚科技平台。
+            </p>
+            <div className="flex space-x-4">
+              <a 
+                href="https://www.instagram.com/tryzeon?igsh=bWZ5aG92enFlYnI0&utm_source=qr" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-300 hover:text-white transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-6 w-6" />
+              </a>
+              <a 
+                href="mailto:tryzeon.team@gmail.com" 
+                className="text-gray-300 hover:text-white transition-colors"
+                aria-label="Gmail"
+              >
+                <Mail className="h-6 w-6" />
+              </a>
+            </div>
+          </div>
+
+          {/* Products Section */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">{t.footer.products}</h4>
+            <ul className="space-y-2">
+              <li>
+                <Link href="#features" className="text-gray-300 hover:text-white transition-colors">
+                  {t.footer.aiVirtualTryOn}
+                </Link>
+              </li>
+              <li>
+                <Link href="#features" className="text-gray-300 hover:text-white transition-colors">
+                  {t.footer.videoGeneration}
+                </Link>
+              </li>
+              <li>
+                <Link href="#features" className="text-gray-300 hover:text-white transition-colors">
+                  {t.footer.aiRecommendation}
+                </Link>
+              </li>
+              <li>
+                <Link href="#features" className="text-gray-300 hover:text-white transition-colors">
+                  {t.footer.dataAnalytics}
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Section */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">{t.footer.contactUs}</h4>
+            <ul className="space-y-2">
+              <li>
+                <a 
+                  href="mailto:tryzeon.team@gmail.com" 
+                  className="text-gray-300 hover:text-white transition-colors flex items-center"
+                >
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  tryzeon.team@gmail.com
+                </a>
+              </li>
+              <li>
+                <Link href="#contact" className="text-gray-300 hover:text-white transition-colors">
+                  {t.footer.businessCooperation}
+                </Link>
+              </li>
+              <li>
+                <Link href="#contact" className="text-gray-300 hover:text-white transition-colors">
+                  {t.footer.technicalSupport}
+                </Link>
+              </li>
+              <li>
+                <Link href="#contact" className="text-gray-300 hover:text-white transition-colors">
+                  {t.footer.mediaContact}
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="border-t border-gray-700 mt-8 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="flex space-x-6 text-sm text-gray-400 mb-4 md:mb-0">
+              <Link href="/privacy" className="hover:text-white transition-colors">
+                {t.footer.privacyPolicy}
+              </Link>
+              <Link href="/terms" className="hover:text-white transition-colors">
+                {t.footer.termsOfService}
+              </Link>
+              <Link href="/privacy#cookies" className="hover:text-white transition-colors">
+                {t.footer.cookiePolicy}
+              </Link>
+            </div>
+            <p className="text-sm text-gray-400">{t.footer.copyright}</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
