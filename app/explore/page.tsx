@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { PageLayout } from '@/components/PageLayout';
 import { Section } from '@/components/Section';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ScrollReveal';
-import { Sparkles, Globe, Rocket, Users, Zap, TrendingUp, Target, Award } from 'lucide-react';
+import { Sparkles, Globe, Rocket, Users, Zap, Target, Award } from 'lucide-react';
 
 export default function ExplorePage() {
   const [currentLang, setCurrentLang] = useState('zh-TW');
@@ -83,7 +83,7 @@ export default function ExplorePage() {
   return (
     <PageLayout currentLang={currentLang} setCurrentLang={setCurrentLang}>
       {/* Hero Section */}
-      <Section className="pt-32 pb-20 text-center">
+      <Section id="hero" className="pt-32 pb-20 text-center">
         <ScrollReveal direction="up">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
             探索 Tryzeon
