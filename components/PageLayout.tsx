@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';

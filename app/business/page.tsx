@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { PageLayout } from '@/components/PageLayout';
 import { Store, TrendingUp, Users, BarChart } from 'lucide-react';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { PageLayout } from '@/components/PageLayout';
 import { Section } from '@/components/Section';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ScrollReveal';

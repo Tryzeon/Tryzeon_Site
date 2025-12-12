@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import Image from 'next/image';
 
 export function PartnerMarquee() {
@@ -49,7 +48,7 @@ export function PartnerMarquee() {
             className="flex-shrink-0 w-[100px] h-[100px] flex items-center justify-center"
           >
             <Image
-              src={`/images/partners/${logo.name}?v=2`}
+              src={`/images/partners/${logo.name}`}
               alt={logo.alt}
               width={100}
               height={100}

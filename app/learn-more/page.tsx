@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { PageLayout } from '@/components/PageLayout';
 import { Smartphone, Users, TrendingUp } from 'lucide-react';
 import Link from 'next/link';

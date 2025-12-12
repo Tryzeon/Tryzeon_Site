@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from "react";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Sparkles, HeartHandshake, Building2, MessageCircle, Store, Video, Shirt, TrendingUp } from "lucide-react";

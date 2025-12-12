@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { PageLayout } from '@/components/PageLayout';
 import { FileText, AlertCircle, CheckCircle } from 'lucide-react';
 
