@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     description: '一張照片即可虛擬試穿，讓時尚購物更智能、更有趣',
     start_url: '/',
     display: 'standalone',
-    background_color: '#F8F5F1',
+    background_color: '#FFFFFF',
     theme_color: '#B8A094',
     orientation: 'portrait-primary',
     icons: [

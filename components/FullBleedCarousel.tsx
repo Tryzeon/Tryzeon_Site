@@ -97,6 +97,10 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
       className="relative w-full h-[85dvh] sm:h-[92dvh] overflow-hidden"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      style={{
+        maskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)',
+      }}
     >
       <div className="absolute inset-0 h-full w-full z-0" style={{ backgroundColor: isCreatorSlide ? '#ffffff' : brand.lightBg }}>
         {slides.map((slide, i) => (
@@ -133,8 +137,8 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
         ))}
       </div>
 
-      {/* Gradient Overlay for better text readability - Full Width */}
-      <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10 pointer-events-none"></div>
+      {/* Gradient Overlay for better text readability */}
+      <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-10 pointer-events-none"></div>
 
       {/* Content */}
       <div className="absolute bottom-8 left-6 right-6 sm:left-12 sm:right-12 z-20">

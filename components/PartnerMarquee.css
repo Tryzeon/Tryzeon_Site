@@ -3,7 +3,7 @@
   position: relative;
   overflow: hidden;
   padding: 3rem 0;
-  background-color: #F8F5F1;
+  background-color: #FFFFFF;
 }
 
 /* 漸層遮罩 */
@@ -13,7 +13,7 @@
   top: 0;
   bottom: 0;
   width: 8rem;
-  background: linear-gradient(to right, #F8F5F1, rgba(248, 245, 241, 0.8), transparent);
+  background: linear-gradient(to right, #FFFFFF, rgba(255, 255, 255, 0.8), transparent);
   z-index: 10;
   pointer-events: none;
 }
@@ -24,7 +24,7 @@
   top: 0;
   bottom: 0;
   width: 8rem;
-  background: linear-gradient(to left, #F8F5F1, rgba(248, 245, 241, 0.8), transparent);
+  background: linear-gradient(to left, #FFFFFF, rgba(255, 255, 255, 0.8), transparent);
   z-index: 10;
   pointer-events: none;
 }

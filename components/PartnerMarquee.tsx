@@ -1,8 +1,15 @@
 'use client';
 
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export function PartnerMarquee() {
+  const [timestamp, setTimestamp] = useState('');
+  
+  useEffect(() => {
+    setTimestamp(Date.now().toString());
+  }, []);
+  
   const logos = [
     { name: "aachic.png", alt: "AA Chic" },
     { name: "aastar.png", alt: "AA Star" },
@@ -30,13 +37,7 @@ export function PartnerMarquee() {
   const infiniteRow = [...logos, ...logos, ...logos];
 
   return (
-    <div className="relative overflow-hidden py-12 bg-tryzeon-bg">
-      {/* 左側漸層 */}
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-tryzeon-bg via-tryzeon-bg/80 to-transparent z-10 pointer-events-none" />
-
-      {/* 右側漸層 */}
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-tryzeon-bg via-tryzeon-bg/80 to-transparent z-10 pointer-events-none" />
-
+    <div className="relative overflow-hidden py-12">
       {/* 輪播容器 */}
       <div
         className="flex items-center gap-6 animate-marquee hover:[animation-play-state:paused] will-change-transform"
@@ -45,14 +46,15 @@ export function PartnerMarquee() {
         {infiniteRow.map((logo, i) => (
           <div
             key={`partner-${i}`}
-            className="flex-shrink-0 w-[100px] h-[100px] flex items-center justify-center"
+            className="flex-shrink-0 w-[110px] h-[110px] bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
           >
             <Image
-              src={`/images/partners/${logo.name}`}
+              src={`/images/partners/${logo.name}?t=${timestamp}`}
               alt={logo.alt}
-              width={100}
-              height={100}
-              className="object-contain mix-blend-multiply"
+              width={110}
+              height={110}
+              className="object-contain w-full h-full"
+              style={{ mixBlendMode: 'normal' }}
             />
           </div>
         ))}

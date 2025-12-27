@@ -1,5 +1,5 @@
 export const brand = {
-  lightBg: "#F8F5F1",
+  lightBg: "#FFFFFF",
   deepBeige: "#B8A094",
   ink: "#0B0B0B",
   accent: "#1E90FF",

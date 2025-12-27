@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { translations } from '@/lib/translations';
@@ -14,6 +14,19 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
   const [showLangMenu, setShowLangMenu] = useState(false);
   const [showProductMenu, setShowProductMenu] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // 當滾動超過視窗高度（輪播圖高度）時，切換為黑色文字
+      const scrollPosition = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      setIsScrolled(scrollPosition > viewportHeight * 0.7);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const t = translations[currentLang as keyof typeof translations] || translations['zh-TW'];
 
@@ -55,7 +68,15 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <a href="#" className="text-3xl font-bold text-white transition-colors hover:text-gray-200" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
+          <a 
+            href="#" 
+            className={`text-3xl font-bold transition-colors ${
+              isScrolled 
+                ? 'text-gray-900 hover:text-gray-700' 
+                : 'text-white hover:text-gray-200'
+            }`}
+            style={isScrolled ? {} : { textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
+          >
             Tryzeon
           </a>
 
@@ -68,8 +89,12 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
               onMouseLeave={() => setShowProductMenu(false)}
             >
               <button
-                className="flex items-center space-x-1 text-sm font-medium text-white/90 hover:text-white transition-colors"
-                style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
+                className={`flex items-center space-x-1 text-sm font-medium transition-colors ${
+                  isScrolled 
+                    ? 'text-gray-700 hover:text-gray-900' 
+                    : 'text-white/90 hover:text-white'
+                }`}
+                style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
               >
                 <span>{t.nav.product}</span>
                 <ChevronDown className="w-4 h-4" />
@@ -98,8 +123,12 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
                 key={item.href}
                 href={item.href}
                 onClick={scrollToSection}
-                className="text-sm font-medium text-white/90 hover:text-white transition-colors"
-                style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
+                className={`text-sm font-medium transition-colors ${
+                  isScrolled 
+                    ? 'text-gray-700 hover:text-gray-900' 
+                    : 'text-white/90 hover:text-white'
+                }`}
+                style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
               >
                 {item.label}
               </a>
@@ -112,8 +141,12 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
             <div className="relative">
               <button
                 onClick={() => setShowLangMenu(!showLangMenu)}
-                className="flex items-center space-x-1 text-sm font-medium text-white/90 hover:text-white transition-colors"
-                style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
+                className={`flex items-center space-x-1 text-sm font-medium transition-colors ${
+                  isScrolled 
+                    ? 'text-gray-700 hover:text-gray-900' 
+                    : 'text-white/90 hover:text-white'
+                }`}
+                style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
               >
                 <span>{currentLang === 'zh-TW' ? '繁中' : 'EN'}</span>
                 <ChevronDown className="w-4 h-4" />
@@ -140,8 +173,12 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
             {/* Login */}
             <a
               href="#"
-              className="text-sm font-medium text-white/90 hover:text-white transition-colors"
-              style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
+              className={`text-sm font-medium transition-colors ${
+                isScrolled 
+                  ? 'text-gray-700 hover:text-gray-900' 
+                  : 'text-white/90 hover:text-white'
+              }`}
+              style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
             >
               {t.nav.login}
             </a>
@@ -150,7 +187,11 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
             <a
               href="#contact"
               onClick={scrollToSection}
-              className="px-4 py-2 text-sm font-medium rounded-md bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-white/30 transition-colors"
+              className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                isScrolled 
+                  ? 'bg-blue-600 text-white hover:bg-blue-700 border border-blue-600' 
+                  : 'bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-white/30'
+              }`}
             >
               {t.nav.getStarted}
             </a>
