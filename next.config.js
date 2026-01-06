@@ -43,12 +43,7 @@ const nextConfig = {
         hostname: 'videos.pexels.com',
       },
     ],
-    localPatterns: [
-      {
-        pathname: '/images/**',
-        search: '',
-      },
-    ],
+    // localPatterns removed to allow query strings (timestamp) and all local paths
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
