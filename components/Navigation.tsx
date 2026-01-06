@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { translations } from '@/lib/translations';
@@ -68,13 +68,12 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <a 
-            href="#" 
-            className={`text-3xl font-bold transition-colors ${
-              isScrolled 
-                ? 'text-gray-900 hover:text-gray-700' 
+          <a
+            href="#"
+            className={`text-3xl font-bold transition-colors ${isScrolled
+                ? 'text-gray-900 hover:text-gray-700'
                 : 'text-white hover:text-gray-200'
-            }`}
+              }`}
             style={isScrolled ? {} : { textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
           >
             Tryzeon
@@ -89,11 +88,10 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
               onMouseLeave={() => setShowProductMenu(false)}
             >
               <button
-                className={`flex items-center space-x-1 text-sm font-medium transition-colors ${
-                  isScrolled 
-                    ? 'text-gray-700 hover:text-gray-900' 
+                className={`flex items-center space-x-1 text-sm font-medium transition-colors ${isScrolled
+                    ? 'text-gray-700 hover:text-gray-900'
                     : 'text-white/90 hover:text-white'
-                }`}
+                  }`}
                 style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
               >
                 <span>{t.nav.product}</span>
@@ -123,11 +121,10 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
                 key={item.href}
                 href={item.href}
                 onClick={scrollToSection}
-                className={`text-sm font-medium transition-colors ${
-                  isScrolled 
-                    ? 'text-gray-700 hover:text-gray-900' 
+                className={`text-sm font-medium transition-colors ${isScrolled
+                    ? 'text-gray-700 hover:text-gray-900'
                     : 'text-white/90 hover:text-white'
-                }`}
+                  }`}
                 style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
               >
                 {item.label}
@@ -141,11 +138,10 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
             <div className="relative">
               <button
                 onClick={() => setShowLangMenu(!showLangMenu)}
-                className={`flex items-center space-x-1 text-sm font-medium transition-colors ${
-                  isScrolled 
-                    ? 'text-gray-700 hover:text-gray-900' 
+                className={`flex items-center space-x-1 text-sm font-medium transition-colors ${isScrolled
+                    ? 'text-gray-700 hover:text-gray-900'
                     : 'text-white/90 hover:text-white'
-                }`}
+                  }`}
                 style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
               >
                 <span>{currentLang === 'zh-TW' ? '繁中' : 'EN'}</span>
@@ -173,11 +169,10 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
             {/* Login */}
             <a
               href="#"
-              className={`text-sm font-medium transition-colors ${
-                isScrolled 
-                  ? 'text-gray-700 hover:text-gray-900' 
+              className={`text-sm font-medium transition-colors ${isScrolled
+                  ? 'text-gray-700 hover:text-gray-900'
                   : 'text-white/90 hover:text-white'
-              }`}
+                }`}
               style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
             >
               {t.nav.login}
@@ -187,11 +182,10 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
             <a
               href="#contact"
               onClick={scrollToSection}
-              className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                isScrolled 
-                  ? 'bg-blue-600 text-white hover:bg-blue-700 border border-blue-600' 
+              className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${isScrolled
+                  ? 'bg-blue-600 text-white hover:bg-blue-700 border border-blue-600'
                   : 'bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-white/30'
-              }`}
+                }`}
             >
               {t.nav.getStarted}
             </a>

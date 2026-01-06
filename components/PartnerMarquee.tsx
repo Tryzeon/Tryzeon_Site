@@ -1,15 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export function PartnerMarquee() {
   const [timestamp, setTimestamp] = useState('');
-  
+
   useEffect(() => {
     setTimestamp(Date.now().toString());
   }, []);
-  
+
   const logos = [
     { name: "aachic.png", alt: "AA Chic" },
     { name: "aastar.png", alt: "AA Star" },
