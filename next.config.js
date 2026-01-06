@@ -13,7 +13,7 @@ const nextConfig = {
   },
 
   // 編譯優化
-  swcMinify: true,
+  // swcMinify: true, // Removed as it is default in Next.js 13+ and causes config validation error
 
   // 輸出配置
   output: 'standalone',
