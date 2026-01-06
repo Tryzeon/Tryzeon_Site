@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 interface FAQItem {
@@ -17,7 +17,7 @@ export function FAQ({ items }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [showAll, setShowAll] = useState(false);
   const [mounted, setMounted] = useState(false);
-  
+
   // 確保客戶端掛載後才渲染動態內容
   useEffect(() => {
     setMounted(true);
@@ -36,7 +36,7 @@ export function FAQ({ items }: FAQProps) {
     return (
       <div className="max-w-3xl mx-auto space-y-4">
         {items.slice(0, 4).map((item, index) => (
-          <div 
+          <div
             key={index}
             className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
           >
@@ -63,7 +63,7 @@ export function FAQ({ items }: FAQProps) {
   return (
     <div className="max-w-3xl mx-auto space-y-4">
       {displayedItems.map((item, index) => (
-        <div 
+        <div
           key={index}
           className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-shadow hover:shadow-md"
         >
@@ -74,17 +74,16 @@ export function FAQ({ items }: FAQProps) {
             <span className="font-semibold text-gray-900 pr-8">
               {item.question}
             </span>
-            <div 
+            <div
               className={`flex-shrink-0 transition-transform duration-200 ${openIndex === index ? 'rotate-180' : ''}`}
             >
               <ChevronDown className="w-5 h-5 text-gray-500" />
             </div>
           </button>
-          
-          <div 
-            className={`overflow-hidden transition-all duration-200 ${
-              openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-            }`}
+
+          <div
+            className={`overflow-hidden transition-all duration-200 ${openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+              }`}
           >
             <div className="px-6 pb-5 text-gray-600 leading-relaxed">
               {item.answer}
@@ -92,7 +91,7 @@ export function FAQ({ items }: FAQProps) {
           </div>
         </div>
       ))}
-      
+
       {/* 顯示更多按鈕 */}
       {hasMore && (
         <div className="flex justify-center pt-6">
