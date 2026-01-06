@@ -1,15 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export function PartnerMarquee() {
-  const [timestamp, setTimestamp] = useState('');
-
-  useEffect(() => {
-    setTimestamp(Date.now().toString());
-  }, []);
-
   const logos = [
     { name: "aachic.png", alt: "AA Chic" },
     { name: "aastar.png", alt: "AA Star" },
@@ -19,7 +12,7 @@ export function PartnerMarquee() {
     { name: "future.png", alt: "Future" },
     { name: "littlesis.png", alt: "Little Sis" },
     { name: "loveuni.png", alt: "Love Uni" },
-    { name: "M&D.png", alt: "M&D" },
+    { name: "MD.png", alt: "M&D" },
     { name: "nabistudio.png", alt: "Nabi Studio" },
     { name: "oatmeal.png", alt: "Oatmeal" },
     { name: "opbrandshop.png", alt: "OP Brand Shop" },
@@ -30,7 +23,7 @@ export function PartnerMarquee() {
     { name: "viviq.png", alt: "Viviq" },
     { name: "ystrive.png", alt: "Y Strive" },
     { name: "zebra.png", alt: "Zebra" },
-    { name: "遇見.png", alt: "遇見" },
+    { name: "Meet.png", alt: "遇見" },
   ];
 
   // 複製三次以確保無縫循環
@@ -49,7 +42,7 @@ export function PartnerMarquee() {
             className="flex-shrink-0 w-[110px] h-[110px] bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
           >
             <Image
-              src={`/images/partners/${logo.name}?t=${timestamp}`}
+              src={`/images/partners/${logo.name}`}
               alt={logo.alt}
               width={110}
               height={110}
