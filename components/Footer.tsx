@@ -25,28 +25,28 @@ interface FooterProps {
 
 export function Footer({ t }: FooterProps) {
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-fashion-charcoal text-white pt-24 pb-12">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
           {/* Brand Section */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold mb-2">Tryzeon</h3>
-            <p className="text-sm text-gray-400 mb-4">創然科技股份有限公司</p>
-            <p className="text-gray-300 mb-4 max-w-md">
+            <h3 className="text-3xl font-serif font-medium mb-4">Tryzeon</h3>
+            <p className="text-[10px] font-display font-bold uppercase tracking-[0.3em] text-fashion-gold mb-6">創然科技股份有限公司</p>
+            <p className="text-white/50 mb-8 max-w-sm font-display font-light leading-relaxed">
               AI × 時尚科技新創，專注於虛擬試穿技術，連結創作者與品牌，打造全球性時尚科技平台。
             </p>
             <div className="flex space-x-4">
-              <a 
-                href="https://www.instagram.com/tryzeon?igsh=bWZ5aG92enFlYnI0&utm_source=qr" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.instagram.com/tryzeon?igsh=bWZ5aG92enFlYnI0&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-300 hover:text-white transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="h-6 w-6" />
               </a>
-              <a 
-                href="mailto:tryzeon.team@gmail.com" 
+              <a
+                href="mailto:tryzeon.team@gmail.com"
                 className="text-gray-300 hover:text-white transition-colors"
                 aria-label="Gmail"
               >
@@ -57,25 +57,25 @@ export function Footer({ t }: FooterProps) {
 
           {/* Products Section */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">{t.footer.products}</h4>
-            <ul className="space-y-2">
+            <h4 className="text-xs font-display font-bold uppercase tracking-[0.2em] text-fashion-gold mb-8">{t.footer.products}</h4>
+            <ul className="space-y-4">
               <li>
-                <Link href="#features" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="#features" className="text-white/40 hover:text-white transition-colors font-display text-sm font-light">
                   {t.footer.aiVirtualTryOn}
                 </Link>
               </li>
               <li>
-                <Link href="#features" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="#features" className="text-white/40 hover:text-white transition-colors font-display text-sm font-light">
                   {t.footer.videoGeneration}
                 </Link>
               </li>
               <li>
-                <Link href="#features" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="#features" className="text-white/40 hover:text-white transition-colors font-display text-sm font-light">
                   {t.footer.aiRecommendation}
                 </Link>
               </li>
               <li>
-                <Link href="#features" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="#features" className="text-white/40 hover:text-white transition-colors font-display text-sm font-light">
                   {t.footer.dataAnalytics}
                 </Link>
               </li>
@@ -84,29 +84,29 @@ export function Footer({ t }: FooterProps) {
 
           {/* Contact Section */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">{t.footer.contactUs}</h4>
-            <ul className="space-y-2">
+            <h4 className="text-xs font-display font-bold uppercase tracking-[0.2em] text-fashion-gold mb-8">{t.footer.contactUs}</h4>
+            <ul className="space-y-4">
               <li>
-                <a 
-                  href="mailto:tryzeon.team@gmail.com" 
-                  className="text-gray-300 hover:text-white transition-colors flex items-center"
+                <a
+                  href="mailto:tryzeon.team@gmail.com"
+                  className="text-white/40 hover:text-white transition-colors flex items-center font-display text-sm font-light"
                 >
-                  <MessageCircle className="h-4 w-4 mr-2" />
+                  <MessageCircle className="h-4 w-4 mr-3" />
                   tryzeon.team@gmail.com
                 </a>
               </li>
               <li>
-                <Link href="#contact" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="#contact" className="text-white/40 hover:text-white transition-colors font-display text-sm font-light">
                   {t.footer.businessCooperation}
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="#contact" className="text-white/40 hover:text-white transition-colors font-display text-sm font-light">
                   {t.footer.technicalSupport}
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="#contact" className="text-white/40 hover:text-white transition-colors font-display text-sm font-light">
                   {t.footer.mediaContact}
                 </Link>
               </li>
@@ -115,9 +115,9 @@ export function Footer({ t }: FooterProps) {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-gray-700 mt-8 pt-8">
+        <div className="border-t border-white/5 mt-20 pt-12">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex space-x-6 text-sm text-gray-400 mb-4 md:mb-0">
+            <div className="flex space-x-8 text-[11px] font-display font-bold uppercase tracking-widest text-white/30 mb-6 md:mb-0">
               <Link href="/privacy" className="hover:text-white transition-colors">
                 {t.footer.privacyPolicy}
               </Link>
@@ -128,7 +128,7 @@ export function Footer({ t }: FooterProps) {
                 {t.footer.cookiePolicy}
               </Link>
             </div>
-            <p className="text-sm text-gray-400">{t.footer.copyright}</p>
+            <p className="text-[11px] font-display font-bold uppercase tracking-widest text-white/20">{t.footer.copyright}</p>
           </div>
         </div>
       </div>

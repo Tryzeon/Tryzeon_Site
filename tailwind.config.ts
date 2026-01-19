@@ -9,7 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Apple 液態玻璃色彩系統
+        // Luxury Fashion Color Palette
+        fashion: {
+          stone: '#F9F9F8',
+          charcoal: '#1A1A1A',
+          gold: '#D4AF37',
+          silver: '#E5E5E5',
+          beige: '#F5F5F0',
+        },
+        // Apple 液態玻璃色彩系統 (Refined)
         glass: {
           blue: '#007AFF',
           purple: '#AF52DE',
@@ -21,7 +29,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['var(--font-outfit)', 'Inter', 'sans-serif'],
+        serif: ['var(--font-playfair)', 'serif'],
+        display: ['var(--font-outfit)', 'sans-serif'],
       },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1rem' }],

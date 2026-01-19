@@ -63,24 +63,28 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 glass transition-all duration-500"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-4 md:px-0 ${isScrolled ? 'top-4' : 'top-0'
+        }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className={`max-w-7xl mx-auto transition-all duration-500 ${isScrolled
+          ? 'bg-white/70 backdrop-blur-2xl rounded-full shadow-apple-lg border border-white/20 px-8 py-2 max-w-5xl'
+          : 'bg-transparent py-4 px-6 md:px-12 xl:px-24'
+        }`}>
+        <div className="flex justify-between items-center h-12 md:h-14">
           {/* Logo */}
           <a
             href="#"
-            className={`text-3xl font-bold transition-colors ${isScrolled
-                ? 'text-gray-900 hover:text-gray-700'
-                : 'text-white hover:text-gray-200'
+            className={`text-2xl md:text-3xl font-serif font-medium transition-colors ${isScrolled
+              ? 'text-fashion-charcoal hover:text-fashion-gold'
+              : 'text-white hover:text-fashion-gold'
               }`}
-            style={isScrolled ? {} : { textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
+            style={isScrolled ? {} : { textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
           >
             Tryzeon
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-10">
             {/* Product Dropdown */}
             <div
               className="relative"
@@ -88,31 +92,38 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
               onMouseLeave={() => setShowProductMenu(false)}
             >
               <button
-                className={`flex items-center space-x-1 text-sm font-medium transition-colors ${isScrolled
-                    ? 'text-gray-700 hover:text-gray-900'
-                    : 'text-white/90 hover:text-white'
+                className={`flex items-center space-x-1.5 text-xs font-medium uppercase tracking-widest transition-colors ${isScrolled
+                  ? 'text-fashion-charcoal/80 hover:text-fashion-charcoal'
+                  : 'text-white/80 hover:text-white'
                   }`}
-                style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
+                style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}
               >
                 <span>{t.nav.product}</span>
-                <ChevronDown className="w-4 h-4" />
+                <ChevronDown className="w-3.5 h-3.5" />
               </button>
 
-              {showProductMenu && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50">
-                  {productMenuItems.map((item, index) => (
-                    <a
-                      key={index}
-                      href={item.href}
-                      onClick={scrollToSection}
-                      className="block px-4 py-3 hover:bg-gray-50 transition-colors"
-                    >
-                      <div className="font-medium text-gray-900 text-sm">{item.label}</div>
-                      <div className="text-xs text-gray-500 mt-0.5">{item.desc}</div>
-                    </a>
-                  ))}
-                </div>
-              )}
+              <AnimatePresence>
+                {showProductMenu && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 5 }}
+                    className="absolute top-full left-0 mt-3 w-64 bg-fashion-stone/95 backdrop-blur-xl rounded-2xl shadow-apple-lg border border-black/5 py-3 z-50 overflow-hidden"
+                  >
+                    {productMenuItems.map((item, index) => (
+                      <a
+                        key={index}
+                        href={item.href}
+                        onClick={scrollToSection}
+                        className="block px-5 py-3.5 hover:bg-black/5 transition-colors group"
+                      >
+                        <div className="font-medium text-fashion-charcoal text-sm group-hover:text-fashion-gold transition-colors">{item.label}</div>
+                        <div className="text-[10px] text-fashion-charcoal/40 uppercase tracking-tighter mt-1">{item.desc}</div>
+                      </a>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Other Nav Items */}
@@ -121,11 +132,11 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
                 key={item.href}
                 href={item.href}
                 onClick={scrollToSection}
-                className={`text-sm font-medium transition-colors ${isScrolled
-                    ? 'text-gray-700 hover:text-gray-900'
-                    : 'text-white/90 hover:text-white'
+                className={`text-xs font-medium uppercase tracking-widest transition-colors ${isScrolled
+                  ? 'text-fashion-charcoal/80 hover:text-fashion-charcoal font-semibold'
+                  : 'text-white/80 hover:text-white'
                   }`}
-                style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
+                style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}
               >
                 {item.label}
               </a>
@@ -133,58 +144,52 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
           </div>
 
           {/* Right Side */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center space-x-8">
             {/* Language Selector */}
             <div className="relative">
               <button
                 onClick={() => setShowLangMenu(!showLangMenu)}
-                className={`flex items-center space-x-1 text-sm font-medium transition-colors ${isScrolled
-                    ? 'text-gray-700 hover:text-gray-900'
-                    : 'text-white/90 hover:text-white'
+                className={`flex items-center space-x-1 text-[10px] font-bold tracking-tighter uppercase transition-colors ${isScrolled
+                  ? 'text-fashion-charcoal/60 hover:text-fashion-charcoal'
+                  : 'text-white/60 hover:text-white'
                   }`}
-                style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
               >
                 <span>{currentLang === 'zh-TW' ? '繁中' : 'EN'}</span>
-                <ChevronDown className="w-4 h-4" />
+                <ChevronDown className="w-3 h-3" />
               </button>
 
-              {showLangMenu && (
-                <div className="absolute top-full right-0 mt-2 w-32 bg-white rounded-lg shadow-lg py-1 z-50">
-                  <button
-                    onClick={() => { setCurrentLang('zh-TW'); setShowLangMenu(false); }}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+              <AnimatePresence>
+                {showLangMenu && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className="absolute top-full right-0 mt-2 w-32 bg-fashion-stone/95 backdrop-blur-xl rounded-xl shadow-apple-lg border border-black/5 py-1 z-50"
                   >
-                    繁體中文
-                  </button>
-                  <button
-                    onClick={() => { setCurrentLang('en'); setShowLangMenu(false); }}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                  >
-                    English
-                  </button>
-                </div>
-              )}
+                    <button
+                      onClick={() => { setCurrentLang('zh-TW'); setShowLangMenu(false); }}
+                      className="block w-full text-left px-4 py-2.5 text-[11px] font-medium text-fashion-charcoal hover:bg-black/5"
+                    >
+                      繁體中文
+                    </button>
+                    <button
+                      onClick={() => { setCurrentLang('en'); setShowLangMenu(false); }}
+                      className="block w-full text-left px-4 py-2.5 text-[11px] font-medium text-fashion-charcoal hover:bg-black/5"
+                    >
+                      English
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-
-            {/* Login */}
-            <a
-              href="#"
-              className={`text-sm font-medium transition-colors ${isScrolled
-                  ? 'text-gray-700 hover:text-gray-900'
-                  : 'text-white/90 hover:text-white'
-                }`}
-              style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
-            >
-              {t.nav.login}
-            </a>
 
             {/* CTA Button */}
             <a
               href="#contact"
               onClick={scrollToSection}
-              className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${isScrolled
-                  ? 'bg-blue-600 text-white hover:bg-blue-700 border border-blue-600'
-                  : 'bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-white/30'
+              className={`px-5 py-2 text-[10px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 ${isScrolled
+                ? 'bg-fashion-charcoal text-white hover:bg-fashion-gold shadow-apple'
+                : 'bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/30'
                 }`}
             >
               {t.nav.getStarted}
@@ -194,10 +199,14 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-white transition-colors"
+            className="lg:hidden transition-colors"
             aria-label={isMobileMenuOpen ? "關閉選單" : "開啟選單"}
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
+            {isMobileMenuOpen ? (
+              <X className={`w-6 h-6 ${isScrolled ? 'text-fashion-charcoal' : 'text-white'}`} />
+            ) : (
+              <Menu className={`w-6 h-6 ${isScrolled ? 'text-fashion-charcoal' : 'text-white'}`} />
+            )}
           </button>
         </div>
 
@@ -205,33 +214,36 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden overflow-hidden bg-black/95 backdrop-blur-md border-t border-white/10"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="lg:hidden overflow-hidden bg-fashion-stone/98 backdrop-blur-2xl rounded-3xl mt-4 shadow-apple-lg border border-black/5"
             >
-              <div className="py-4 space-y-1">
+              <div className="py-6 px-4 space-y-1">
                 {navigationItems.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
                     onClick={scrollToSection}
-                    className="block px-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors"
+                    className="block px-6 py-4 text-sm font-medium uppercase tracking-widest text-fashion-charcoal hover:text-fashion-gold transition-colors"
                   >
                     {item.label}
                   </a>
                 ))}
-                <div className="border-t border-white/10 my-2 mx-6"></div>
-                <a href="#" className="block px-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors">
-                  {t.nav.login}
-                </a>
-                <a
-                  href="#contact"
-                  onClick={scrollToSection}
-                  className="block mx-6 mt-4 px-4 py-3 text-sm text-center bg-white text-black font-semibold rounded-md hover:bg-gray-200 transition-colors"
-                >
-                  {t.nav.getStarted}
-                </a>
+                <div className="border-t border-black/5 my-4 mx-6"></div>
+                <div className="flex justify-between items-center px-6 py-4">
+                  <div className="flex space-x-4">
+                    <button onClick={() => setCurrentLang('zh-TW')} className={`text-[10px] uppercase font-bold ${currentLang === 'zh-TW' ? 'text-fashion-gold' : 'text-fashion-charcoal/40'}`}>繁中</button>
+                    <button onClick={() => setCurrentLang('en')} className={`text-[10px] uppercase font-bold ${currentLang === 'en' ? 'text-fashion-gold' : 'text-fashion-charcoal/40'}`}>EN</button>
+                  </div>
+                  <a
+                    href="#contact"
+                    onClick={scrollToSection}
+                    className="px-6 py-3 text-[10px] font-bold uppercase tracking-widest bg-fashion-charcoal text-white rounded-full"
+                  >
+                    {t.nav.getStarted}
+                  </a>
+                </div>
               </div>
             </motion.div>
           )}
