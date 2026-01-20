@@ -126,12 +126,13 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
         </AnimatePresence>
       </div>
 
-      {/* Luxury Vignette Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-fashion-charcoal/70 via-transparent to-fashion-charcoal/30 z-10 pointer-events-none"></div>
+      {/* Luxury Vignette Overlays - Multiple layers for maximum readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-fashion-charcoal/80 via-transparent to-fashion-charcoal/30 z-10 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-fashion-charcoal/80 via-fashion-charcoal/20 to-transparent z-10 pointer-events-none"></div>
 
       {/* Content */}
       <div className="absolute inset-0 z-20 flex flex-col justify-end pb-24 md:pb-32 px-8 sm:px-16 md:px-24">
-        <div className="max-w-4xl">
+        <div className="max-w-3xl">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -141,17 +142,26 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               {currentSlide?.kicker && (
-                <div className="text-white/80 text-[10px] md:text-[12px] font-display font-bold tracking-[0.4em] uppercase mb-4">
+                <div
+                  className="text-white/90 text-[10px] md:text-[12px] font-display font-bold tracking-[0.4em] uppercase mb-4"
+                  style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}
+                >
                   {currentSlide.kicker}
                 </div>
               )}
               {currentSlide?.title && (
-                <h1 className="text-white text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-medium leading-[1.1] mb-6 tracking-tight">
+                <h1
+                  className="text-white text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-medium leading-[1.1] mb-6 tracking-tight"
+                  style={{ textShadow: '0 4px 12px rgba(0,0,0,0.6)' }}
+                >
                   {currentSlide.title}
                 </h1>
               )}
               {currentSlide?.desc && (
-                <p className="max-w-xl text-white/70 text-base md:text-xl font-display font-light leading-relaxed mb-10">
+                <p
+                  className="max-w-lg text-white/80 text-base md:text-xl font-display font-light leading-relaxed mb-12"
+                  style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}
+                >
                   {currentSlide.desc}
                 </p>
               )}
@@ -162,7 +172,7 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
                 >
                   <OptimizedLink
                     href={currentSlide.cta.href}
-                    className="inline-flex items-center px-10 py-4 rounded-full transition-all duration-300 font-display font-bold text-xs uppercase tracking-[0.2em] shadow-apple-lg bg-white text-fashion-charcoal hover:bg-fashion-gold hover:text-white hover:scale-105"
+                    className="inline-flex items-center px-12 py-5 rounded-sm transition-all duration-300 font-display font-bold text-xs uppercase tracking-[0.2em] shadow-2xl bg-white text-fashion-charcoal hover:bg-fashion-gold hover:text-white"
                     onClick={(e: React.MouseEvent) => {
                       e.stopPropagation();
                       if (autoPlayRef.current) {
