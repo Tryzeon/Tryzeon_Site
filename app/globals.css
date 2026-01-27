@@ -7,8 +7,11 @@
 @layer base {
   :root {
     --tryzeon-bg: #F9F9F8;
-    --fashion-charcoal: #1A1A1A;
-    --fashion-gold: #D4AF37;
+    --fashion-charcoal: #111111;
+    --fashion-gold: #0066CC;
+    --font-outfit: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-playfair: 'Playfair Display', serif;
+    --system-font: var(--font-outfit);
   }
 
   html {
@@ -20,17 +23,15 @@
 
   body {
     background: #F9F9F8;
-    background-image:
-      radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.03) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(26, 26, 26, 0.02) 0px, transparent 50%);
+    font-family: var(--system-font);
     margin: 0;
     padding: 0;
-    color: #1A1A1A;
+    color: #111111;
     letter-spacing: -0.01em;
   }
 
   ::selection {
-    background-color: #1A1A1A;
+    background-color: #0066CC;
     color: #FFFFFF;
   }
 
@@ -40,9 +41,9 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-playfair), serif;
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    font-family: var(--system-font);
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -99,8 +100,11 @@
 
 @layer utilities {
   .glass {
-    @apply backdrop-blur-md bg-white/10 border-b border-white/20 shadow-sm;
+    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   }
 
   .text-balance {
