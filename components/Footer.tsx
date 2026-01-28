@@ -1,6 +1,6 @@
 'use client';
 
-import { MessageCircle, Instagram, Mail } from 'lucide-react';
+import { Instagram, Mail, Linkedin, MapPin, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface FooterProps {
@@ -24,50 +24,114 @@ interface FooterProps {
 }
 
 export function Footer({ t }: FooterProps) {
+  const currentYear = new Date().getFullYear();
+
+  const footerLinks = {
+    products: [
+      { label: t.footer.aiVirtualTryOn, href: '#features' },
+      { label: t.footer.videoGeneration, href: '#features' },
+      { label: t.footer.aiRecommendation, href: '#features' },
+      { label: t.footer.dataAnalytics, href: '#features' }
+    ],
+    company: [
+      { label: '關於我們', href: '#about' },
+      { label: '團隊介紹', href: '#team' },
+      { label: '合作夥伴', href: '#partners' },
+      { label: '最新消息', href: '#' }
+    ],
+    resources: [
+      { label: '常見問題', href: '#faq' },
+      { label: '使用教學', href: '#' },
+      { label: 'API 文件', href: '#', external: true },
+      { label: '開發者資源', href: '#', external: true }
+    ],
+    contact: [
+      { label: t.footer.businessCooperation, href: '#contact' },
+      { label: t.footer.technicalSupport, href: '#contact' },
+      { label: t.footer.mediaContact, href: '#contact' }
+    ]
+  };
+
   return (
-    <footer className="bg-[#F5F5F7] pt-24 pb-12">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 pb-16 border-b border-black/5">
+    <footer className="bg-[#1D1D1F] text-white">
+      {/* Newsletter Section */}
+      <div className="border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 py-20">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
+            <div>
+              <h3 className="text-3xl font-bold mb-3 tracking-tight">Stay Connected</h3>
+              <p className="text-white/60 font-medium text-lg max-w-md">訂閱我們的電子報，獲取最新的 AI 時尚科技趨勢與產品更新。</p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+              <input
+                type="email"
+                placeholder="輸入您的 Email"
+                className="px-6 py-4 bg-white/5 border border-white/10 rounded-full text-white placeholder:text-white/30 focus:outline-none focus:border-[#0066CC] focus:bg-white/10 transition-all w-full sm:w-80 backdrop-blur-sm"
+              />
+              <button className="px-8 py-4 bg-[#0066CC] hover:bg-[#0077ED] text-white rounded-full font-bold transition-all hover:scale-105 active:scale-95 whitespace-nowrap shadow-lg shadow-[#0066CC]/20">
+                訂閱
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Footer Content */}
+      <div className="max-w-7xl mx-auto px-6 py-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-12">
           {/* Brand Section */}
-          <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-display font-bold text-[#1D1D1F] mb-4 tracking-tight">Tryzeon</h3>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0066CC] mb-4">創然科技股份有限公司</p>
-            <p className="text-[#86868B] mb-8 max-w-sm font-medium leading-relaxed text-base">
-              AI × 時尚科技新創，專注於虛擬試穿技術，連結創作者與品牌，打造全球性時尚科技平台。
+          <div className="col-span-2 md:col-span-4 lg:col-span-2 lg:pr-12">
+            <h3 className="text-2xl font-display font-bold mb-4 tracking-tight">Tryzeon</h3>
+            <p className="text-white/50 mb-8 font-medium leading-relaxed">
+              透過 AI 技術重新定義時尚體驗。我們連結創作者、品牌與消費者，打造無縫的虛擬試穿生態系。
             </p>
-            <div className="flex space-x-4">
+            
+            {/* Contact Info */}
+            <div className="space-y-4 mb-8">
+              <a href="mailto:tryzeon.team@gmail.com" className="flex items-center text-white/60 hover:text-white transition-colors text-sm group">
+                <span className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mr-3 group-hover:bg-[#0066CC] transition-colors">
+                  <Mail className="h-4 w-4" />
+                </span>
+                tryzeon.team@gmail.com
+              </a>
+              <div className="flex items-center text-white/60 text-sm">
+                <span className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mr-3">
+                  <MapPin className="h-4 w-4" />
+                </span>
+                台灣台北市 (Taipei, Taiwan)
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex space-x-3">
               <a
-                href="https://www.instagram.com/tryzeon?igsh=bWZ5aG92enFlYnI0&utm_source=qr"
+                href="https://www.instagram.com/tryzeon"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#86868B] hover:text-[#0066CC] hover:shadow-md transition-all duration-300"
+                className="w-10 h-10 bg-white/5 hover:bg-[#0066CC] rounded-full flex items-center justify-center text-white/60 hover:text-white transition-all duration-300"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
               </a>
               <a
-                href="mailto:tryzeon.team@gmail.com"
-                className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#86868B] hover:text-[#0066CC] hover:shadow-md transition-all duration-300"
-                aria-label="Email"
+                href="https://linkedin.com/company/tryzeon"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/5 hover:bg-[#0066CC] rounded-full flex items-center justify-center text-white/60 hover:text-white transition-all duration-300"
+                aria-label="LinkedIn"
               >
-                <Mail className="h-5 w-5" />
+                <Linkedin className="h-5 w-5" />
               </a>
             </div>
           </div>
 
-          {/* Products Section */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-[0.15em] text-[#1D1D1F] mb-6">{t.footer.products}</h4>
-            <ul className="space-y-3">
-              {[
-                { label: t.footer.aiVirtualTryOn, href: '#features' },
-                { label: t.footer.videoGeneration, href: '#features' },
-                { label: t.footer.aiRecommendation, href: '#features' },
-                { label: t.footer.dataAnalytics, href: '#features' }
-              ].map((link, i) => (
+          {/* Products */}
+          <div className="col-span-1">
+            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#86868B] mb-6">Products</h4>
+            <ul className="space-y-4">
+              {footerLinks.products.map((link, i) => (
                 <li key={i}>
-                  <Link href={link.href} className="text-[#86868B] hover:text-[#0066CC] transition-colors font-medium text-sm">
+                  <Link href={link.href} className="text-white/70 hover:text-[#0066CC] transition-colors text-sm font-medium">
                     {link.label}
                   </Link>
                 </li>
@@ -75,26 +139,46 @@ export function Footer({ t }: FooterProps) {
             </ul>
           </div>
 
-          {/* Contact Section */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-[0.15em] text-[#1D1D1F] mb-6">{t.footer.contactUs}</h4>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href="mailto:tryzeon.team@gmail.com"
-                  className="text-[#0066CC] hover:text-[#0077ED] transition-colors flex items-center font-medium text-sm"
-                >
-                  <MessageCircle className="h-4 w-4 mr-2" />
-                  tryzeon.team@gmail.com
-                </a>
-              </li>
-              {[
-                { label: t.footer.businessCooperation, href: '#contact' },
-                { label: t.footer.technicalSupport, href: '#contact' },
-                { label: t.footer.mediaContact, href: '#contact' }
-              ].map((link, i) => (
+          {/* Company */}
+          <div className="col-span-1">
+            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#86868B] mb-6">Company</h4>
+            <ul className="space-y-4">
+              {footerLinks.company.map((link, i) => (
                 <li key={i}>
-                  <Link href={link.href} className="text-[#86868B] hover:text-[#0066CC] transition-colors font-medium text-sm">
+                  <Link href={link.href} className="text-white/70 hover:text-[#0066CC] transition-colors text-sm font-medium">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div className="col-span-1">
+            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#86868B] mb-6">Resources</h4>
+            <ul className="space-y-4">
+              {footerLinks.resources.map((link, i) => (
+                <li key={i}>
+                  <Link 
+                    href={link.href} 
+                    className="text-white/70 hover:text-[#0066CC] transition-colors text-sm font-medium inline-flex items-center group"
+                    {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  >
+                    {link.label}
+                    {link.external && <ArrowUpRight className="h-3 w-3 ml-1 opacity-50 group-hover:opacity-100" />}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div className="col-span-1">
+            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#86868B] mb-6">Contact</h4>
+            <ul className="space-y-4">
+              {footerLinks.contact.map((link, i) => (
+                <li key={i}>
+                  <Link href={link.href} className="text-white/70 hover:text-[#0066CC] transition-colors text-sm font-medium">
                     {link.label}
                   </Link>
                 </li>
@@ -102,22 +186,28 @@ export function Footer({ t }: FooterProps) {
             </ul>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Section */}
-        <div className="pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-center md:text-left">
-            <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-3">
-              <Link href="/privacy" className="text-xs font-medium text-[#86868B] hover:text-[#0066CC] transition-colors">
+      {/* Bottom Section */}
+      <div className="border-t border-white/5 bg-[#161617]">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div className="text-xs text-[#86868B]">
+              Copyright © {currentYear} Tryzeon Inc. All rights reserved.
+            </div>
+            <div className="flex flex-wrap justify-center gap-6">
+              <Link href="/privacy" className="text-xs text-[#86868B] hover:text-white transition-colors">
                 {t.footer.privacyPolicy}
               </Link>
-              <Link href="/terms" className="text-xs font-medium text-[#86868B] hover:text-[#0066CC] transition-colors">
+              <span className="text-[#86868B]/30">|</span>
+              <Link href="/terms" className="text-xs text-[#86868B] hover:text-white transition-colors">
                 {t.footer.termsOfService}
               </Link>
-              <Link href="/privacy#cookies" className="text-xs font-medium text-[#86868B] hover:text-[#0066CC] transition-colors">
-                {t.footer.cookiePolicy}
-              </Link>
+              <span className="text-[#86868B]/30">|</span>
+              <span className="text-xs text-[#86868B]">
+                Taiwan 🇹🇼
+              </span>
             </div>
-            <p className="text-xs font-medium text-[#86868B]/60">{t.footer.copyright}</p>
           </div>
         </div>
       </div>

@@ -1,28 +1,22 @@
 'use client';
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
-import { Sparkles, HeartHandshake, Building2, MessageCircle, Store, Video, Shirt, TrendingUp, Mail } from "lucide-react";
+import { Sparkles, HeartHandshake, Store, Video, Shirt, TrendingUp, Mail } from "lucide-react";
 import { FullBleedCarousel } from "@/components/FullBleedCarousel";
 import { Navigation } from "@/components/Navigation";
 import { Section } from "@/components/Section";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { ParallaxText, ScrollZoomCard, Scroll3D, ScrollCounter } from "@/components/ScrollLinkedAnimations";
+import { BentoGrid, BentoCard } from "@/components/BentoGrid";
 import { translations } from "@/lib/translations";
 import { faqData } from "@/lib/faq-data";
 import { heroSlides } from "@/lib/hero-slides";
 
-// 延遲載入非關鍵組件
-const PartnerMarquee = dynamic(() => import("@/components/PartnerMarquee").then(mod => ({ default: mod.PartnerMarquee })), {
-  loading: () => <div className="h-32 flex items-center justify-center"><span className="text-gray-400">載入中...</span></div>,
-  ssr: true
-});
-
-const FAQ = dynamic(() => import("@/components/FAQ").then(mod => ({ default: mod.FAQ })), {
-  loading: () => <div className="h-64 flex items-center justify-center"><span className="text-gray-400">載入中...</span></div>,
-  ssr: true
-});
+import { PartnerMarquee } from "@/components/PartnerMarquee";
+import { FAQ } from "@/components/FAQ";
+import { AppleButton, AppleLink } from "@/components/MicroInteractions";
 
 export default function TryzeonLanding() {
   const [currentLang, setCurrentLang] = useState('zh-TW');
@@ -36,84 +30,86 @@ export default function TryzeonLanding() {
         <FullBleedCarousel slides={heroSlides} auto={true} interval={5000} />
       </header>
 
-      {/* Brand Statement - Apple Style: Centered & Impactful */}
-      <Section id="statement" className="py-40 md:py-60 bg-white">
+      {/* Brand Statement - Apple Style: Centered & Impactful with Parallax */}
+      <Section id="statement" className="py-32 md:py-64 bg-white">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <ScrollReveal direction="up">
-            <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold text-[#1D1D1F] leading-[0.95] tracking-tighter mb-12">
+          <ParallaxText>
+            <h2 className="text-5xl md:text-8xl lg:text-9xl font-bold text-[#1D1D1F] leading-[0.95] tracking-tighter mb-10 md:mb-12">
               The Future of <br />
               <span className="text-[#0066CC]">Digital Style</span>
             </h2>
-            <p className="text-2xl md:text-3xl text-[#1D1D1F] font-medium leading-relaxed max-w-3xl mx-auto mb-16 text-balance opacity-90">
+          </ParallaxText>
+          <ScrollReveal direction="up" delay={0.2}>
+            <p className="text-xl md:text-3xl text-[#1D1D1F] font-medium leading-relaxed max-w-3xl mx-auto mb-12 md:mb-16 text-balance opacity-90">
               一張照片，即刻生成虛擬試穿影片。<br />Tryzeon 正在重新定義時尚決策的未來。
             </p>
             <div className="flex justify-center">
-              <a
-                href="/experience"
-                className="group flex items-center space-x-2 text-[#0066CC] font-bold text-2xl hover:underline"
+              <AppleLink 
+                href="/experience" 
+                className="text-xl md:text-2xl font-bold"
               >
-                <span>立即體驗</span>
-                <span className="transition-transform duration-300 group-hover:translate-x-2 text-3xl">→</span>
-              </a>
+                立即體驗
+              </AppleLink>
             </div>
           </ScrollReveal>
         </div>
       </Section>
 
       {/* Market Stats - Apple Style: Clean Grid */}
-      <Section id="stats" className="py-32 bg-[#F5F5F7]">
+      <Section id="stats" className="py-24 md:py-48 bg-[#F5F5F7]">
         <div className="max-w-6xl mx-auto px-6">
           <ScrollReveal direction="up">
-            <div className="text-center mb-20">
-              <h1 className="text-sm font-bold uppercase tracking-[0.3em] text-[#86868B] mb-6">Market Validation</h1>
-              <h2 className="text-4xl md:text-6xl font-bold text-[#1D1D1F] tracking-tight">數據證實價值</h2>
+            <div className="text-center mb-16 md:mb-24">
+              <h1 className="text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-[#86868B] mb-4 md:mb-6">Market Validation</h1>
+              <h2 className="text-3xl md:text-6xl font-bold text-[#1D1D1F] tracking-tight">數據證實價值</h2>
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {[
-              { val: "84%", label: "AR Interest", desc: "消費者對 AR 試用功能表現出強烈興趣" },
-              { val: "71%", label: "Frequency", desc: "支持試穿功能會顯著增加選購頻率" },
-              { val: "30%", label: "Conversion", desc: "有效提升電商轉換率與銷售效果" },
-              { val: "25%", label: "Return Rate", desc: "有效降低退貨率，優化營運成本" }
+              { val: 84, suffix: "%", label: "AR Interest", desc: "消費者對 AR 試用功能表現出強烈興趣" },
+              { val: 71, suffix: "%", label: "Frequency", desc: "支持試穿功能會顯著增加選購頻率" },
+              { val: 30, suffix: "%", label: "Conversion", desc: "有效提升電商轉換率與銷售效果" },
+              { val: 25, suffix: "%", label: "Return Rate", desc: "有效降低退貨率，優化營運成本" }
             ].map((stat, i) => (
-              <ScrollReveal key={i} direction="up" delay={i * 0.1}>
-                <div className="bg-white rounded-[40px] p-12 h-full shadow-sm hover:shadow-xl transition-all duration-500 text-center border border-black/[0.02]">
-                  <div className="text-6xl md:text-7xl font-bold text-[#1D1D1F] mb-6 tracking-tighter">{stat.val}</div>
-                  <div className="text-sm font-bold uppercase tracking-[0.2em] text-[#0066CC] mb-6">{stat.label}</div>
-                  <p className="text-[#86868B] text-base leading-relaxed font-medium">{stat.desc}</p>
+              <Scroll3D key={i}>
+                <div className="bg-white rounded-[32px] md:rounded-[40px] p-8 md:p-12 h-full shadow-sm text-center border border-black/[0.02] card-hover-lift">
+                  <div className="text-5xl md:text-7xl font-bold text-[#1D1D1F] mb-4 md:mb-6 tracking-tighter stat-highlight">
+                    <ScrollCounter target={stat.val} suffix={stat.suffix} />
+                  </div>
+                  <div className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#0066CC] mb-4 md:mb-6">{stat.label}</div>
+                  <p className="text-[#86868B] text-sm md:text-base leading-relaxed font-medium">{stat.desc}</p>
                 </div>
-              </ScrollReveal>
+              </Scroll3D>
             ))}
           </div>
         </div>
       </Section>
 
       {/* Target Audience - Apple Style: Product Focus Cards */}
-      <Section id="audience" className="py-40 bg-white">
+      <Section id="audience" className="py-32 md:py-56 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <ScrollReveal direction="up" className="text-center mb-24">
-            <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-[#0066CC] mb-6">Tailored Solutions</h2>
-            <h2 className="text-5xl md:text-7xl font-bold text-[#1D1D1F] tracking-tight">為誰而設計</h2>
+          <ScrollReveal direction="up" className="text-center mb-20 md:mb-32">
+            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#0066CC] mb-4 md:mb-6">Tailored Solutions</h2>
+            <h2 className="text-4xl md:text-7xl font-bold text-[#1D1D1F] tracking-tight">為誰而設計</h2>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-2 gap-10">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             {/* B2B小型服飾品牌 */}
-            <ScrollReveal direction="up" delay={0.2}>
-              <div className="group bg-[#F5F5F7] rounded-[48px] p-12 md:p-16 h-full flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl transition-all duration-700">
+            <ScrollZoomCard>
+              <div className="group bg-[#F5F5F7] rounded-[40px] md:rounded-[48px] p-10 md:p-16 h-full flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl transition-all duration-700">
                 <div className="max-w-md">
-                  <span className="text-[#86868B] text-sm font-bold uppercase tracking-widest mb-4 block">01 / Brand Solutions</span>
-                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1D1D1F] mb-8 leading-tight">低成本提升視覺<br />吸引力與轉換率</h3>
-                  <a
-                    href="https://docs.google.com/forms/d/e/1FAIpQLScu_hKsOTUVcuB0R3sKnRh9cAbn7zchO7W8izdgG1N9-WC9AQ/viewform?usp=header"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-8 py-3 bg-[#0066CC] text-white rounded-full font-bold transition-all hover:bg-[#0077ED] hover:scale-105"
+                  <span className="text-[#86868B] text-xs md:text-sm font-bold uppercase tracking-widest mb-4 block">01 / Brand Solutions</span>
+                  <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#1D1D1F] mb-6 md:mb-8 leading-tight">低成本提升視覺<br />吸引力與轉換率</h3>
+                  <AppleButton
+                    variant="primary"
+                    size="md"
+                    onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLScu_hKsOTUVcuB0R3sKnRh9cAbn7zchO7W8izdgG1N9-WC9AQ/viewform?usp=header', '_blank')}
                   >
                     品牌合作申請
-                  </a>
+                  </AppleButton>
                 </div>
-                <div className="mt-12 relative aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
+                <div className="mt-8 md:mt-12 relative aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
                   <Image
                     src="/images/audience/b2b-fashion-store.jpg"
                     alt="Fashion Boutique Store"
@@ -123,22 +119,24 @@ export default function TryzeonLanding() {
                   />
                 </div>
               </div>
-            </ScrollReveal>
+            </ScrollZoomCard>
 
             {/* B2C一般用戶 */}
-            <ScrollReveal direction="up" delay={0.4}>
-              <div className="group bg-[#F5F5F7] rounded-[48px] p-12 md:p-16 h-full flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl transition-all duration-700">
+            <ScrollZoomCard>
+              <div className="group bg-[#F5F5F7] rounded-[40px] md:rounded-[48px] p-10 md:p-16 h-full flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl transition-all duration-700">
                 <div className="max-w-md">
-                  <span className="text-[#86868B] text-sm font-bold uppercase tracking-widest mb-4 block">02 / Personal Experience</span>
-                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1D1D1F] mb-8 leading-tight">告別試穿煩惱<br />遇見最美的自己</h3>
-                  <a
-                    href="/join"
-                    className="inline-flex items-center px-8 py-3 bg-[#1D1D1F] text-white rounded-full font-bold transition-all hover:bg-black hover:scale-105"
+                  <span className="text-[#86868B] text-xs md:text-sm font-bold uppercase tracking-widest mb-4 block">02 / Personal Experience</span>
+                  <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#1D1D1F] mb-6 md:mb-8 leading-tight">告別試穿煩惱<br />遇見最美的自己</h3>
+                  <AppleButton
+                    variant="secondary"
+                    size="md"
+                    className="!bg-[#1D1D1F] !text-white hover:!bg-[#2D2D2F]"
+                    onClick={() => window.location.href = '/join'}
                   >
                     加入試用行列
-                  </a>
+                  </AppleButton>
                 </div>
-                <div className="mt-12 relative aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
+                <div className="mt-8 md:mt-12 relative aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
                   <Image
                     src="/images/audience/b2c-user-phone.jpg"
                     alt="Mobile Fashion App"
@@ -148,109 +146,154 @@ export default function TryzeonLanding() {
                   />
                 </div>
               </div>
-            </ScrollReveal>
+            </ScrollZoomCard>
           </div>
         </div>
       </Section>
 
-      {/* Features Section - Apple Style: Clean Bento Grid */}
-      <Section id="features" className="py-40 bg-[#F5F5F7]">
+      {/* Features Section - Apple Style: Bento Grid */}
+      <Section id="features" className="py-24 md:py-48 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
-          <ScrollReveal direction="up" className="text-center mb-32">
-            <h1 className="text-sm font-bold uppercase tracking-[0.3em] text-[#86868B] mb-6">Core Technology</h1>
-            <h2 className="text-5xl md:text-7xl font-bold text-[#1D1D1F] tracking-tight">五大核心功能</h2>
+          <ScrollReveal direction="up" className="text-center mb-16 md:mb-24">
+            <h1 className="text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-[#86868B] mb-4 md:mb-6">Core Technology</h1>
+            <h2 className="text-4xl md:text-7xl font-bold text-[#1D1D1F] tracking-tight">五大核心功能</h2>
           </ScrollReveal>
 
-          {/* First row: 3 features */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { icon: <Sparkles className="h-10 w-10 text-[#0066CC]" />, title: t.features.aiTryOn.title, desc: t.features.aiTryOn.desc },
-              { icon: <Video className="h-10 w-10 text-[#0066CC]" />, title: t.features.videoGeneration.title, desc: t.features.videoGeneration.desc },
-              { icon: <Shirt className="h-10 w-10 text-[#0066CC]" />, title: t.features.aiRecommendation.title, desc: t.features.aiRecommendation.desc }
-            ].map((feature, i) => (
-              <ScrollReveal key={i} direction="up" delay={i * 0.1}>
-                <div className="group bg-white rounded-[40px] p-10 h-full shadow-sm hover:shadow-xl transition-all duration-500 border border-black/[0.02]">
-                  <div className="w-16 h-16 rounded-[20px] bg-[#F5F5F7] flex items-center justify-center mb-8 transition-transform duration-500 group-hover:scale-110">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-2xl font-bold text-[#1D1D1F] mb-4">{feature.title}</h3>
-                  <p className="text-[#86868B] text-base leading-relaxed font-medium">{feature.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+          <BentoGrid>
+            {/* Feature 1: AI Virtual Try-On (Large, Dark) */}
+            <BentoCard
+              colSpan={2}
+              dark
+              title={t.features.aiTryOn.title}
+              description={t.features.aiTryOn.desc}
+              icon={<Sparkles />}
+              graphic={
+                <div className="absolute right-0 bottom-0 w-1/2 h-full opacity-50 bg-gradient-to-l from-[#0066CC]/30 to-transparent" />
+              }
+            />
 
-          {/* Second row: 2 features centered */}
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-8">
-            {[
-              { icon: <TrendingUp className="h-10 w-10 text-[#0066CC]" />, title: t.features.dataAnalytics.title, desc: t.features.dataAnalytics.desc },
-              { icon: <Store className="h-10 w-10 text-[#0066CC]" />, title: t.features.tryOnRoom.title, desc: t.features.tryOnRoom.desc }
-            ].map((feature, i) => (
-              <ScrollReveal key={i + 3} direction="up" delay={(i + 3) * 0.1}>
-                <div className="group bg-white rounded-[40px] p-10 h-full shadow-sm hover:shadow-xl transition-all duration-500 border border-black/[0.02]">
-                  <div className="w-16 h-16 rounded-[20px] bg-[#F5F5F7] flex items-center justify-center mb-8 transition-transform duration-500 group-hover:scale-110">
-                    {feature.icon}
+            {/* Feature 2: Video Generation */}
+            <BentoCard
+              title={t.features.videoGeneration.title}
+              description={t.features.videoGeneration.desc}
+              icon={<Video />}
+              graphic={
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#E0F2FF]/50 to-transparent opacity-50" />
+              }
+            />
+
+            {/* Feature 3: AI Recommendation */}
+            <BentoCard
+              title={t.features.aiRecommendation.title}
+              description={t.features.aiRecommendation.desc}
+              icon={<Shirt />}
+            />
+
+            {/* Feature 4: Data Analytics */}
+            <BentoCard
+              title={t.features.dataAnalytics.title}
+              description={t.features.dataAnalytics.desc}
+              icon={<TrendingUp />}
+            />
+
+            {/* Feature 5: Try-On Room */}
+            <BentoCard
+              title={t.features.tryOnRoom.title}
+              description={t.features.tryOnRoom.desc}
+              icon={<Store />}
+            />
+          </BentoGrid>
+
+          {/* AI Try-On Demo Video Section */}
+          <ScrollReveal direction="up" delay={0.2}>
+            <div className="mt-24 md:mt-32 max-w-5xl mx-auto">
+              <div className="text-center mb-8 md:mb-12">
+                <span className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#0066CC] mb-3 md:mb-4 block">Live Demo</span>
+                <h3 className="text-3xl md:text-4xl font-bold text-[#1D1D1F] tracking-tight">AI 虛擬試穿效果展示</h3>
+              </div>
+              
+              <div className="relative group">
+                {/* Video Container with Apple-style rounded corners */}
+                <div className="relative aspect-video rounded-[24px] md:rounded-[32px] overflow-hidden bg-[#1D1D1F] shadow-2xl border border-black/10">
+                  {/* Placeholder for demo video - replace src with actual video */}
+                  <video
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    poster="/images/video-poster.jpg"
+                  >
+                    <source src="/videos/ai-tryon-demo.mp4" type="video/mp4" />
+                    {/* Fallback content */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0066CC]/20 to-[#1D1D1F]">
+                      <div className="text-center text-white">
+                        <Video className="h-12 w-12 md:h-16 md:w-16 mx-auto mb-4 opacity-60" />
+                        <p className="text-base md:text-lg font-medium opacity-80">AI 試穿效果 Demo</p>
+                      </div>
+                    </div>
+                  </video>
+                  
+                  {/* Video overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
+                  
+                  {/* Play button overlay (appears when video is not available) */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 transition-transform">
+                      <div className="w-0 h-0 border-t-[10px] md:border-t-[12px] border-t-transparent border-l-[16px] md:border-l-[20px] border-l-[#1D1D1F] border-b-[10px] md:border-b-[12px] border-b-transparent ml-1"></div>
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-[#1D1D1F] mb-4">{feature.title}</h3>
-                  <p className="text-[#86868B] text-base leading-relaxed font-medium">{feature.desc}</p>
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
+                
+                {/* Video caption */}
+                <p className="text-center text-[#86868B] text-sm mt-6 font-medium">
+                  上傳一張照片，即可生成虛擬試穿效果
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
 
           <ScrollReveal direction="up" delay={0.4}>
-            <div className="text-center mt-24">
-              <a
-                href="/products"
-                className="inline-flex items-center px-12 py-5 bg-[#1D1D1F] text-white hover:bg-black rounded-full transition-all duration-300 font-bold text-xl shadow-2xl hover:scale-105 active:scale-95"
+            <div className="text-center mt-16 md:mt-24">
+              <AppleButton
+                variant="secondary"
+                size="lg"
+                className="!bg-[#1D1D1F] !text-white hover:!bg-[#2D2D2F] shadow-2xl"
+                onClick={() => window.location.href = '/products'}
               >
                 查看完整產品介紹
-              </a>
+              </AppleButton>
             </div>
           </ScrollReveal>
         </div>
       </Section>
 
       {/* About Section - Apple Style: Focused Vision */}
-      <Section id="about" className="py-32 md:py-48 bg-white">
+      <Section id="about" className="py-24 md:py-48 bg-white">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <ScrollReveal direction="up">
-            <div className="w-24 h-24 bg-[#F5F5F7] rounded-3xl flex items-center justify-center mx-auto mb-12">
-              <HeartHandshake className="h-12 w-12 text-[#0066CC]" />
+            <div className="w-20 h-20 md:w-24 md:h-24 bg-[#F5F5F7] rounded-3xl flex items-center justify-center mx-auto mb-8 md:mb-12">
+              <HeartHandshake className="h-10 w-10 md:h-12 md:w-12 text-[#0066CC]" />
             </div>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-[#86868B] mb-6">Core Vision</h2>
-            <h3 className="text-4xl md:text-6xl font-bold text-[#1D1D1F] mb-12">{t.about.title}</h3>
-            <p className="text-2xl md:text-3xl text-[#86868B] font-medium leading-relaxed max-w-3xl mx-auto text-balance">
+            <h2 className="text-xs md:text-sm font-bold uppercase tracking-widest text-[#86868B] mb-4 md:mb-6">Core Vision</h2>
+            <h3 className="text-3xl md:text-6xl font-bold text-[#1D1D1F] mb-8 md:mb-12">{t.about.title}</h3>
+            <p className="text-xl md:text-3xl text-[#86868B] font-medium leading-relaxed max-w-3xl mx-auto text-balance">
               "{t.about.desc}"
             </p>
           </ScrollReveal>
         </div>
       </Section>
 
-      {/* Team Section - Apple Style: Minimalist People Focus */}
-      <Section id="team" className="py-32 bg-[#F5F5F7]">
-        <div className="max-w-5xl mx-auto px-6 text-center">
-          <ScrollReveal direction="up">
-            <Building2 className="mx-auto h-16 w-16 text-[#86868B] mb-10 opacity-30" />
-            <h2 className="text-sm font-bold uppercase tracking-widest text-[#86868B] mb-6">Who We Are</h2>
-            <h3 className="text-4xl md:text-6xl font-bold text-[#1D1D1F] mb-10">{t.team.title}</h3>
-            <p className="max-w-3xl mx-auto text-[#86868B] font-medium text-xl leading-relaxed">
-              {t.team.desc}
-            </p>
-          </ScrollReveal>
-        </div>
-      </Section>
-
       {/* Partner Logos Section - Apple Style: Glass Floating */}
-      <Section id="partners" className="py-32 bg-white">
+      <Section id="partners" className="py-24 md:py-48 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
           <ScrollReveal direction="up">
-            <div className="text-center mb-20">
-              <h2 className="text-sm font-bold uppercase tracking-widest text-[#86868B] mb-6">Our Partners</h2>
-              <h3 className="text-4xl md:text-5xl font-bold text-[#1D1D1F] mb-8">{t.partners.title}</h3>
-              <p className="text-[#86868B] font-medium uppercase tracking-widest text-sm">{t.partners.desc}</p>
+            <div className="text-center mb-16 md:mb-24">
+              <h2 className="text-xs md:text-sm font-bold uppercase tracking-widest text-[#86868B] mb-4 md:mb-6">Our Partners</h2>
+              <h3 className="text-3xl md:text-5xl font-bold text-[#1D1D1F] mb-6 md:mb-8">{t.partners.title}</h3>
+              <p className="text-[#86868B] font-medium uppercase tracking-widest text-xs md:text-sm">{t.partners.desc}</p>
             </div>
-            <div className="bg-[#F5F5F7] rounded-[40px] p-2 overflow-hidden border border-black/[0.05]">
+            <div className="bg-[#F5F5F7] rounded-[32px] md:rounded-[40px] p-2 overflow-hidden border border-black/[0.05]">
               <PartnerMarquee />
             </div>
           </ScrollReveal>
@@ -258,49 +301,62 @@ export default function TryzeonLanding() {
       </Section>
 
       {/* FAQ Section - Apple Style: Clean Accordion */}
-      <Section id="faq" className="py-32 bg-[#F5F5F7]">
+      <Section id="faq" className="py-24 md:py-48 bg-[#F5F5F7]">
         <div className="max-w-4xl mx-auto px-6">
           <ScrollReveal direction="up">
-            <div className="text-center mb-20">
-              <h2 className="text-sm font-bold uppercase tracking-widest text-[#86868B] mb-6">Support</h2>
-              <h3 className="text-4xl md:text-6xl font-bold text-[#1D1D1F] mb-10">常見問題</h3>
+            <div className="text-center mb-16 md:mb-24">
+              <h2 className="text-xs md:text-sm font-bold uppercase tracking-widest text-[#86868B] mb-4 md:mb-6">Support</h2>
+              <h3 className="text-3xl md:text-6xl font-bold text-[#1D1D1F] mb-6 md:mb-10">常見問題</h3>
               <p className="text-[#86868B] font-medium text-lg lg:text-xl">
                 關於 Tryzeon 的常見疑問，我們都在這裡為您解答
               </p>
             </div>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.2}>
-            <div className="bg-white rounded-[40px] p-10 md:p-16 shadow-sm border border-black/[0.03]">
+            <div className="bg-white rounded-[32px] md:rounded-[40px] p-8 md:p-16 shadow-sm border border-black/[0.03]">
               <FAQ items={faqData[currentLang as keyof typeof faqData] || faqData['zh-TW']} />
             </div>
           </ScrollReveal>
         </div>
       </Section>
 
-      {/* Contact Section - Apple Style: Light & Inviting */}
-      <Section id="contact" className="py-32 md:py-48 bg-white relative overflow-hidden">
-        {/* Subtle gradient orb */}
+      {/* Contact/CTA Section - Apple Style: High Impact Dark Mode */}
+      <Section id="contact" className="py-32 md:py-56 bg-[#1D1D1F] relative overflow-hidden">
+        {/* Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-[#0066CC]/5 to-[#0066CC]/10 rounded-full blur-[100px]"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-gradient-to-br from-[#0066CC]/20 to-[#0066CC]/5 rounded-full blur-[120px] animate-pulse-glow"></div>
         </div>
 
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+        <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
           <ScrollReveal direction="up">
-            <div className="w-20 h-20 bg-[#F5F5F7] rounded-[24px] flex items-center justify-center mx-auto mb-10">
-              <MessageCircle className="h-10 w-10 text-[#0066CC]" />
-            </div>
-            <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-[#86868B] mb-6">Contact Us</h2>
-            <h3 className="text-5xl md:text-7xl font-bold text-[#1D1D1F] mb-8 tracking-tight">{t.contact.title}</h3>
-            <p className="text-xl md:text-2xl text-[#86868B] font-medium mb-12 leading-relaxed max-w-2xl mx-auto">
-              {t.contact.desc}
+            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-[#86868B] mb-6 md:mb-8">Get Started</h2>
+            <h3 className="text-4xl md:text-7xl lg:text-8xl font-bold text-white mb-6 md:mb-8 tracking-tight leading-tight">
+              Ready to transform<br />your fashion business?
+            </h3>
+            <p className="text-lg md:text-2xl text-[#86868B] font-medium mb-12 md:mb-16 leading-relaxed max-w-2xl mx-auto text-balance">
+              Join the revolution of AI-powered fashion retail. Experience higher conversion rates and lower returns today.
             </p>
-            <a
-              href={`mailto:${t.contact.email}`}
-              className="inline-flex items-center px-10 py-5 bg-[#0066CC] text-white rounded-full font-bold text-xl transition-all duration-300 hover:bg-[#0077ED] hover:scale-105 shadow-lg hover:shadow-xl"
-            >
-              <Mail className="h-6 w-6 mr-3" />
-              {t.contact.email}
-            </a>
+            
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
+              <AppleButton
+                variant="secondary"
+                size="lg"
+                className="!bg-white !text-[#1D1D1F] hover:!bg-[#F5F5F7] w-full md:w-auto"
+                onClick={() => window.location.href = `mailto:${t.contact.email}`}
+              >
+                <Mail className="h-5 w-5 md:h-6 md:w-6 mr-3" />
+                {t.contact.email}
+              </AppleButton>
+              
+              <AppleButton
+                variant="ghost"
+                size="lg"
+                className="!text-white border border-white/20 hover:!bg-white/10 w-full md:w-auto"
+                onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Explore Features
+              </AppleButton>
+            </div>
           </ScrollReveal>
         </div>
       </Section>

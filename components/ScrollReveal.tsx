@@ -1,7 +1,22 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, Variants } from 'framer-motion';
 import { useRef, ReactNode } from 'react';
+
+/**
+ * Apple 風格緩動曲線
+ * 這些曲線經過精心調整，模仿 Apple 產品頁面的動畫質感
+ */
+const appleEasing = {
+  // 標準緩動 - 適用於大多數過渡
+  standard: [0.25, 0.1, 0.25, 1.0] as const,
+  // 強調緩動 - 適用於重要動畫
+  emphasized: [0.4, 0, 0.2, 1] as const,
+  // 減速緩動 - 適用於進入動畫
+  decelerate: [0, 0, 0.2, 1] as const,
+  // 柔和緩動 - 適用於微妙的過渡
+  gentle: [0.4, 0, 0.6, 1] as const,
+};
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -22,47 +37,66 @@ export function ScrollReveal({
   children, 
   direction = 'up', 
   delay = 0, 
-  duration = 0.6,
+  duration = 0.7,
   className = ''
 }: ScrollRevealProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
-    once: true, // 只觸發一次
-    margin: '-100px' // 提前 100px 觸發
+    once: true,
+    margin: '-80px' // 更精確的觸發時機
   });
 
-  // 根據方向設定初始位置
-  const getInitialPosition = () => {
+  // 根據方向設定動畫變體 - Apple 風格的微妙位移
+  const getVariants = (): Variants => {
+    const distance = 40; // 減少位移距離，更精緻
+    
     switch (direction) {
       case 'up':
-        return { y: 60, opacity: 0 };
+        return {
+          hidden: { y: distance, opacity: 0, filter: 'blur(4px)' },
+          visible: { y: 0, opacity: 1, filter: 'blur(0px)' }
+        };
       case 'down':
-        return { y: -60, opacity: 0 };
+        return {
+          hidden: { y: -distance, opacity: 0, filter: 'blur(4px)' },
+          visible: { y: 0, opacity: 1, filter: 'blur(0px)' }
+        };
       case 'left':
-        return { x: -60, opacity: 0 };
+        return {
+          hidden: { x: -distance, opacity: 0, filter: 'blur(4px)' },
+          visible: { x: 0, opacity: 1, filter: 'blur(0px)' }
+        };
       case 'right':
-        return { x: 60, opacity: 0 };
+        return {
+          hidden: { x: distance, opacity: 0, filter: 'blur(4px)' },
+          visible: { x: 0, opacity: 1, filter: 'blur(0px)' }
+        };
       case 'fade':
-        return { opacity: 0 };
+        return {
+          hidden: { opacity: 0, scale: 0.98 },
+          visible: { opacity: 1, scale: 1 }
+        };
       default:
-        return { y: 60, opacity: 0 };
+        return {
+          hidden: { y: distance, opacity: 0, filter: 'blur(4px)' },
+          visible: { y: 0, opacity: 1, filter: 'blur(0px)' }
+        };
     }
-  };
-
-  // 最終位置
-  const getFinalPosition = () => {
-    return { x: 0, y: 0, opacity: 1 };
   };
 
   return (
     <motion.div
       ref={ref}
-      initial={getInitialPosition()}
-      animate={isInView ? getFinalPosition() : getInitialPosition()}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={getVariants()}
       transition={{
         duration,
         delay,
-        ease: [0.25, 0.1, 0.25, 1.0] // 自然的緩動曲線
+        ease: appleEasing.decelerate,
+        // 為不同屬性設定不同的過渡時間
+        opacity: { duration: duration * 0.8, ease: appleEasing.standard },
+        filter: { duration: duration * 1.2, ease: appleEasing.gentle }
       }}
       className={className}
     >
@@ -82,13 +116,13 @@ interface StaggerContainerProps {
 
 export function StaggerContainer({ 
   children, 
-  staggerDelay = 0.1,
+  staggerDelay = 0.08,
   className = '' 
 }: StaggerContainerProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
     once: true,
-    margin: '-100px'
+    margin: '-60px'
   });
 
   return (
@@ -97,9 +131,12 @@ export function StaggerContainer({
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={{
+        hidden: { opacity: 0 },
         visible: {
+          opacity: 1,
           transition: {
-            staggerChildren: staggerDelay
+            staggerChildren: staggerDelay,
+            delayChildren: 0.1
           }
         }
       }}
@@ -124,37 +161,39 @@ export function StaggerItem({
   direction = 'up',
   className = '' 
 }: StaggerItemProps) {
-  const getVariants = () => {
+  const distance = 30;
+  
+  const getVariants = (): Variants => {
     switch (direction) {
       case 'up':
         return {
-          hidden: { y: 40, opacity: 0 },
-          visible: { y: 0, opacity: 1 }
+          hidden: { y: distance, opacity: 0, filter: 'blur(4px)' },
+          visible: { y: 0, opacity: 1, filter: 'blur(0px)' }
         };
       case 'down':
         return {
-          hidden: { y: -40, opacity: 0 },
-          visible: { y: 0, opacity: 1 }
+          hidden: { y: -distance, opacity: 0, filter: 'blur(4px)' },
+          visible: { y: 0, opacity: 1, filter: 'blur(0px)' }
         };
       case 'left':
         return {
-          hidden: { x: -40, opacity: 0 },
-          visible: { x: 0, opacity: 1 }
+          hidden: { x: -distance, opacity: 0, filter: 'blur(4px)' },
+          visible: { x: 0, opacity: 1, filter: 'blur(0px)' }
         };
       case 'right':
         return {
-          hidden: { x: 40, opacity: 0 },
-          visible: { x: 0, opacity: 1 }
+          hidden: { x: distance, opacity: 0, filter: 'blur(4px)' },
+          visible: { x: 0, opacity: 1, filter: 'blur(0px)' }
         };
       case 'fade':
         return {
-          hidden: { opacity: 0 },
-          visible: { opacity: 1 }
+          hidden: { opacity: 0, scale: 0.95 },
+          visible: { opacity: 1, scale: 1 }
         };
       default:
         return {
-          hidden: { y: 40, opacity: 0 },
-          visible: { y: 0, opacity: 1 }
+          hidden: { y: distance, opacity: 0, filter: 'blur(4px)' },
+          visible: { y: 0, opacity: 1, filter: 'blur(0px)' }
         };
     }
   };
@@ -163,8 +202,8 @@ export function StaggerItem({
     <motion.div
       variants={getVariants()}
       transition={{
-        duration: 0.5,
-        ease: [0.25, 0.1, 0.25, 1.0]
+        duration: 0.6,
+        ease: appleEasing.decelerate
       }}
       className={className}
     >
@@ -186,24 +225,29 @@ interface ScaleRevealProps {
 export function ScaleReveal({ 
   children, 
   delay = 0, 
-  duration = 0.6,
+  duration = 0.7,
   className = '' 
 }: ScaleRevealProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
     once: true,
-    margin: '-100px'
+    margin: '-80px'
   });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ scale: 0.8, opacity: 0 }}
-      animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }}
+      initial={{ scale: 0.92, opacity: 0, filter: 'blur(8px)' }}
+      animate={isInView 
+        ? { scale: 1, opacity: 1, filter: 'blur(0px)' } 
+        : { scale: 0.92, opacity: 0, filter: 'blur(8px)' }
+      }
       transition={{
         duration,
         delay,
-        ease: [0.25, 0.1, 0.25, 1.0]
+        ease: appleEasing.decelerate,
+        scale: { duration: duration * 1.1, ease: appleEasing.emphasized },
+        filter: { duration: duration * 1.3, ease: appleEasing.gentle }
       }}
       className={className}
     >

@@ -5,13 +5,29 @@ import { motion, AnimatePresence } from "framer-motion";
 import { OptimizedLink } from './OptimizedLink';
 import { type Slide } from "@/lib/constants";
 
-function SlideImage({ src, alt, isActive, priority }: { src: string; alt: string; isActive: boolean; priority?: boolean }) {
+function SlideImage({ src, alt, isActive, priority, index }: { src: string; alt: string; isActive: boolean; priority?: boolean; index: number }) {
+  // 不同的 Ken Burns 效果方向
+  const kenBurnsVariants = [
+    { scale: [1, 1.08], x: [0, -20] },      // 放大 + 向左
+    { scale: [1.05, 1], x: [20, 0] },       // 縮小 + 向右
+    { scale: [1, 1.06], y: [0, -15] },      // 放大 + 向上
+    { scale: [1.04, 1], y: [15, 0] },       // 縮小 + 向下
+    { scale: [1, 1.07], x: [-15, 15] },     // 放大 + 左到右
+    { scale: [1.03, 1.08], y: [-10, 10] },  // 放大 + 上到下
+  ];
+
+  const variant = kenBurnsVariants[index % kenBurnsVariants.length];
+
   return (
     <motion.div
-      initial={{ scale: 1 }}
-      animate={{ scale: isActive ? 1.05 : 1 }}
-      transition={{ duration: 10, ease: "linear" }}
-      className="relative h-full w-full bg-fashion-stone"
+      initial={{ scale: variant.scale[0], x: variant.x?.[0] || 0, y: variant.y?.[0] || 0 }}
+      animate={isActive ? { 
+        scale: variant.scale[1], 
+        x: variant.x?.[1] || 0, 
+        y: variant.y?.[1] || 0 
+      } : {}}
+      transition={{ duration: 12, ease: "linear" }}
+      className="relative h-full w-full"
     >
       <Image
         src={src}
@@ -21,6 +37,13 @@ function SlideImage({ src, alt, isActive, priority }: { src: string; alt: string
         style={{ objectPosition: 'center center' }}
         priority={priority}
         sizes="100vw"
+        quality={90}
+      />
+      {/* 電影感顆粒紋理覆蓋 */}
+      <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none"
+        style={{
+          backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")',
+        }}
       />
     </motion.div>
   );
@@ -90,7 +113,7 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
 
   return (
     <div
-      className="relative w-full h-[88dvh] sm:h-[95dvh] overflow-hidden bg-black shadow-2xl"
+      className="group relative w-full h-[92dvh] sm:h-[100dvh] overflow-hidden bg-black"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -104,7 +127,7 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
             transition={{ duration: 1, ease: "easeInOut" }}
             className="absolute inset-0 h-full w-full"
           >
-            {currentIndex === 5 && currentSlide.video ? (
+            {currentSlide.video ? (
               <div className="h-full w-full relative">
                 <video
                   src={currentSlide.video}
@@ -114,27 +137,35 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
                   playsInline
                   className="h-full w-full object-cover absolute inset-0"
                 />
-                <div className="absolute inset-0 bg-black/10"></div>
+                {/* 影片覆蓋層 */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20"></div>
               </div>
             ) : (
               <SlideImage
                 src={currentSlide.image}
                 alt={currentSlide.title || `slide-${currentIndex}`}
                 isActive={true}
-                priority={true}
+                priority={currentIndex === 0}
+                index={currentIndex}
               />
             )}
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Apple-style Gradient Overlay */}
-      {/* Gradient Overlay - Cinematic Fade from Left */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent z-10 pointer-events-none"></div>
+      {/* Apple-style Cinematic Gradient Overlay */}
+      <div className="absolute inset-0 z-10 pointer-events-none">
+        {/* 左側漸層 - 電影感 */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
+        {/* 底部漸層 - 細膩的萲萲 */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+        {/* 頂部微妙暗角 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent"></div>
+      </div>
 
       {/* Content Area - Bottom-Left position to avoid covering image subjects */}
-      <div className="absolute inset-0 z-20 flex flex-col justify-end items-start text-left px-6 md:px-12 lg:px-16 pb-16 sm:pb-20">
-        <div className="max-w-lg">
+      <div className="absolute inset-0 z-20 flex flex-col justify-end items-start text-left px-8 md:px-16 lg:px-24 pb-20 sm:pb-28">
+        <div className="max-w-xl">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -144,19 +175,36 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               {currentSlide?.kicker && (
-                <div className="text-white font-display text-xs md:text-sm font-bold tracking-[0.2em] mb-2 opacity-80 uppercase">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="text-white/90 font-display text-xs md:text-sm font-semibold tracking-[0.25em] mb-4 uppercase"
+                >
                   {currentSlide.kicker}
-                </div>
+                </motion.div>
               )}
               {currentSlide?.title && (
-                <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-display font-bold leading-[1.15] mb-3 tracking-tight drop-shadow-md">
+                <motion.h1 
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] mb-4 tracking-tight"
+                  style={{ textShadow: '0 4px 30px rgba(0,0,0,0.3)' }}
+                >
                   {currentSlide.title}
-                </h1>
+                </motion.h1>
               )}
               {currentSlide?.desc && (
-                <p className="max-w-md text-white/90 text-sm md:text-base font-display font-medium leading-relaxed mb-5 text-balance drop-shadow-sm">
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="max-w-lg text-white/85 text-base md:text-lg font-display font-medium leading-relaxed mb-8 text-balance"
+                  style={{ textShadow: '0 2px 10px rgba(0,0,0,0.2)' }}
+                >
                   {currentSlide.desc}
-                </p>
+                </motion.p>
               )}
               {currentSlide?.cta && (
                 <div
@@ -164,18 +212,25 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
                   onMouseEnter={() => setCtaHover(true)}
                   onMouseLeave={() => setCtaHover(false)}
                 >
-                  <OptimizedLink
-                    href={currentSlide.cta.href}
-                    className="inline-flex items-center px-7 py-3 bg-white text-[#1D1D1F] hover:bg-white/90 rounded-full transition-all duration-300 font-display font-bold text-sm shadow-xl hover:scale-105 active:scale-95"
-                    onClick={() => {
-                      if (autoPlayRef.current) {
-                        clearInterval(autoPlayRef.current);
-                        autoPlayRef.current = null;
-                      }
-                    }}
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
                   >
-                    {currentSlide.cta.label}
-                  </OptimizedLink>
+                    <OptimizedLink
+                      href={currentSlide.cta.href}
+                      className="inline-flex items-center px-8 py-4 bg-white text-[#1D1D1F] rounded-full font-display font-bold text-base shadow-2xl btn-apple"
+                      onClick={() => {
+                        if (autoPlayRef.current) {
+                          clearInterval(autoPlayRef.current);
+                          autoPlayRef.current = null;
+                        }
+                      }}
+                    >
+                      {currentSlide.cta.label}
+                      <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    </OptimizedLink>
+                  </motion.div>
                 </div>
               )}
             </motion.div>
@@ -183,36 +238,49 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
         </div>
       </div>
 
-      {/* Navigation Arrows - Minimalist Apple Style */}
-      <div className="absolute right-8 bottom-8 z-30 flex space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      {/* Navigation Arrows - Apple Style with Hover Reveal */}
+      <div className="absolute right-8 md:right-12 bottom-28 sm:bottom-32 z-30 flex space-x-3 opacity-0 group-hover:opacity-100 transition-all duration-500">
         <button
           onClick={(e) => { e.stopPropagation(); prev(); }}
-          className="p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all text-white"
+          className="p-4 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/25 hover:scale-110 transition-all duration-300 text-white shadow-lg"
           aria-label="Previous slide"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft size={22} strokeWidth={2} />
         </button>
         <button
           onClick={(e) => { e.stopPropagation(); next(); }}
-          className="p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all text-white"
+          className="p-4 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/25 hover:scale-110 transition-all duration-300 text-white shadow-lg"
           aria-label="Next slide"
         >
-          <ArrowRight size={20} />
+          <ArrowRight size={22} strokeWidth={2} />
         </button>
       </div>
 
-      {/* Navigation Dots - Progressive Line Style */}
-      <div className="absolute left-1/2 bottom-8 z-30 flex -translate-x-1/2 space-x-2">
+      {/* Navigation Dots - Apple Capsule Style */}
+      <div className="absolute left-1/2 bottom-10 z-30 flex -translate-x-1/2 space-x-2 bg-black/20 backdrop-blur-md rounded-full px-4 py-2">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => go(i)}
-            className={`h-1.5 rounded-full transition-all duration-500 ease-out ${i === currentIndex ? 'w-8 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/60'
-              }`}
+            className={`rounded-full transition-all duration-500 ease-out ${i === currentIndex 
+              ? 'w-8 h-2 bg-white shadow-lg' 
+              : 'w-2 h-2 bg-white/40 hover:bg-white/70 hover:scale-125'
+            }`}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div 
+        className="absolute left-1/2 bottom-4 z-30 -translate-x-1/2 opacity-60 group-hover:opacity-100 transition-opacity"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="w-6 h-10 rounded-full border-2 border-white/50 flex justify-center pt-2">
+          <div className="w-1 h-2 bg-white/70 rounded-full"></div>
+        </div>
+      </motion.div>
     </div>
   );
 }

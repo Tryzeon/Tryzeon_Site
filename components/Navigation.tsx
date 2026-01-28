@@ -34,6 +34,10 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
     e.preventDefault();
     const href = e.currentTarget.getAttribute('href');
     if (href) {
+      if (href.startsWith('http') || href.startsWith('/products')) {
+        window.location.href = href;
+        return;
+      }
       const targetId = href.replace('#', '');
       const element = document.getElementById(targetId);
       if (element) {
@@ -55,7 +59,7 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
   ];
 
   const productMenuItems = [
-    { href: '/products', label: '完整產品介紹', desc: '深入了解所有功能', isExternal: true },
+    { href: '/products', label: '完整產品介紹', desc: '深入了解所有功能' },
     { href: '#features', label: 'AI 虛擬試穿', desc: '一鍵生成穿搭效果' },
     { href: '#features', label: '動態影片生成', desc: '靜態照片轉動態影片' },
     { href: '#features', label: 'B2B 解決方案', desc: '企業級虛擬試穿服務' },
@@ -63,25 +67,26 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-4 md:px-0 ${isScrolled ? 'top-4' : 'top-0'
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] px-4 md:px-0 ${
+        isScrolled ? 'top-4 py-0' : 'top-0 py-4'
+      }`}
     >
-      <div className={`max-w-7xl mx-auto transition-all duration-500 ${isScrolled
-        ? 'bg-white/70 backdrop-blur-2xl rounded-full shadow-apple-lg border border-white/20 px-8 py-2 max-w-5xl'
-        : 'bg-transparent py-4 px-6 md:px-12 xl:px-24'
-        }`}>
+      <div 
+        className={`max-w-7xl mx-auto transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+          isScrolled
+            ? 'rounded-full bg-white/70 shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-white/20 backdrop-blur-xl saturate-150 px-6 py-2 max-w-5xl'
+            : 'px-6 md:px-12 xl:px-24 bg-transparent'
+        }`}
+      >
         <div className="flex justify-between items-center h-12 md:h-14">
           {/* Logo */}
           <a
             href="#"
-            className={`text-2xl md:text-3xl font-display font-bold transition-all duration-300 ${isScrolled
-              ? 'text-[#1D1D1F] hover:text-[#0066CC]'
-              : 'text-white hover:text-[#0066CC]'
-              }`}
-            style={{
-              fontFamily: "'Outfit', 'Inter', sans-serif",
-              ...(isScrolled ? {} : { textShadow: '0 2px 10px rgba(0,0,0,0.3)' })
-            }}
+            className={`text-2xl md:text-3xl font-display font-bold tracking-tight transition-colors duration-300 ${
+              isScrolled
+                ? 'text-[#1D1D1F]'
+                : 'text-white drop-shadow-md'
+            }`}
           >
             Tryzeon
           </a>
@@ -90,40 +95,43 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
           <div className="hidden lg:flex items-center space-x-10">
             {/* Product Dropdown */}
             <div
-              className="relative"
+              className="relative group"
               onMouseEnter={() => setShowProductMenu(true)}
               onMouseLeave={() => setShowProductMenu(false)}
             >
               <button
-                className={`flex items-center space-x-1.5 text-xs font-semibold uppercase tracking-widest transition-colors ${isScrolled
-                  ? 'text-[#1D1D1F]/80 hover:text-[#1D1D1F]'
-                  : 'text-white/80 hover:text-white'
-                  }`}
-                style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}
+                className={`flex items-center space-x-1.5 text-[13px] font-medium tracking-wide transition-colors duration-300 ${
+                  isScrolled
+                    ? 'text-[#1D1D1F]/80 hover:text-[#0066CC]'
+                    : 'text-white/90 hover:text-white drop-shadow-sm'
+                }`}
               >
                 <span>{t.nav.product}</span>
-                <ChevronDown className="w-3.5 h-3.5" />
+                <ChevronDown className="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" />
               </button>
 
               <AnimatePresence>
                 {showProductMenu && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 5 }}
-                    className="absolute top-full left-0 mt-3 w-64 bg-white/90 backdrop-blur-2xl rounded-3xl shadow-2xl border border-black/5 py-3 z-50 overflow-hidden"
+                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                    transition={{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 rounded-2xl shadow-2xl border border-white/20 py-2 overflow-hidden bg-white/80 backdrop-blur-2xl"
                   >
-                    {productMenuItems.map((item, index) => (
-                      <a
-                        key={index}
-                        href={item.href}
-                        onClick={scrollToSection}
-                        className="block px-5 py-3.5 hover:bg-black/5 transition-colors group"
-                      >
-                        <div className="font-medium text-fashion-charcoal text-sm group-hover:text-fashion-gold transition-colors">{item.label}</div>
-                        <div className="text-[10px] text-fashion-charcoal/40 uppercase tracking-tighter mt-1">{item.desc}</div>
-                      </a>
-                    ))}
+                    <div className="px-2 py-1 space-y-1">
+                      {productMenuItems.map((item, index) => (
+                        <a
+                          key={index}
+                          href={item.href}
+                          onClick={scrollToSection}
+                          className="block px-4 py-3 rounded-xl hover:bg-[#F5F5F7] transition-colors group/item"
+                        >
+                          <div className="font-semibold text-[#1D1D1F] text-sm group-hover/item:text-[#0066CC] transition-colors">{item.label}</div>
+                          <div className="text-[11px] text-[#86868B] mt-0.5">{item.desc}</div>
+                        </a>
+                      ))}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -135,11 +143,11 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
                 key={item.href}
                 href={item.href}
                 onClick={scrollToSection}
-                className={`text-xs font-medium uppercase tracking-widest transition-colors ${isScrolled
-                  ? 'text-fashion-charcoal/80 hover:text-fashion-charcoal font-semibold'
-                  : 'text-white/80 hover:text-white'
-                  }`}
-                style={isScrolled ? {} : { textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}
+                className={`text-[13px] font-medium tracking-wide transition-colors duration-300 ${
+                  isScrolled
+                    ? 'text-[#1D1D1F]/80 hover:text-[#0066CC]'
+                    : 'text-white/90 hover:text-white drop-shadow-sm'
+                }`}
               >
                 {item.label}
               </a>
@@ -147,18 +155,19 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
           </div>
 
           {/* Right Side */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6">
             {/* Language Selector */}
             <div className="relative">
               <button
                 onClick={() => setShowLangMenu(!showLangMenu)}
-                className={`flex items-center space-x-1 text-[11px] font-bold tracking-tight uppercase transition-colors ${isScrolled
-                  ? 'text-[#1D1D1F]/60 hover:text-[#1D1D1F]'
-                  : 'text-white/60 hover:text-white'
-                  }`}
+                className={`flex items-center space-x-1 text-[11px] font-semibold tracking-wide uppercase transition-colors duration-300 ${
+                  isScrolled
+                    ? 'text-[#1D1D1F]/70 hover:text-[#1D1D1F]'
+                    : 'text-white/80 hover:text-white drop-shadow-sm'
+                }`}
               >
                 <span>{currentLang === 'zh-TW' ? '繁中' : 'EN'}</span>
-                <ChevronDown className="w-3 h-3" />
+                <ChevronDown className="w-3 h-3 opacity-70" />
               </button>
 
               <AnimatePresence>
@@ -167,17 +176,18 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    className="absolute top-full right-0 mt-2 w-32 bg-fashion-stone/95 backdrop-blur-xl rounded-xl shadow-apple-lg border border-black/5 py-1 z-50"
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full right-0 mt-3 w-32 bg-white/90 backdrop-blur-xl rounded-xl shadow-xl border border-black/5 py-1.5 overflow-hidden"
                   >
                     <button
                       onClick={() => { setCurrentLang('zh-TW'); setShowLangMenu(false); }}
-                      className="block w-full text-left px-4 py-2.5 text-[11px] font-medium text-fashion-charcoal hover:bg-black/5"
+                      className="block w-full text-left px-4 py-2.5 text-[12px] font-medium text-[#1D1D1F] hover:bg-[#F5F5F7] transition-colors"
                     >
                       繁體中文
                     </button>
                     <button
                       onClick={() => { setCurrentLang('en'); setShowLangMenu(false); }}
-                      className="block w-full text-left px-4 py-2.5 text-[11px] font-medium text-fashion-charcoal hover:bg-black/5"
+                      className="block w-full text-left px-4 py-2.5 text-[12px] font-medium text-[#1D1D1F] hover:bg-[#F5F5F7] transition-colors"
                     >
                       English
                     </button>
@@ -190,10 +200,11 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
             <a
               href="#contact"
               onClick={scrollToSection}
-              className={`px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 ${isScrolled
-                ? 'bg-[#1D1D1F] text-white hover:bg-black shadow-lg'
-                : 'bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/30'
-                }`}
+              className={`px-5 py-2 text-[12px] font-bold rounded-full transition-all duration-300 ${
+                isScrolled
+                  ? 'bg-[#1D1D1F] text-white hover:bg-[#000000] hover:scale-105 shadow-md'
+                  : 'bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20'
+              }`}
             >
               {t.nav.getStarted}
             </a>
@@ -202,8 +213,8 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden transition-colors"
-            aria-label={isMobileMenuOpen ? "關閉選單" : "開啟選單"}
+            className="lg:hidden p-2 -mr-2 transition-colors"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMobileMenuOpen ? (
               <X className={`w-6 h-6 ${isScrolled ? 'text-[#1D1D1F]' : 'text-white'}`} />
@@ -217,32 +228,53 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="lg:hidden overflow-hidden bg-white/95 backdrop-blur-2xl rounded-[40px] mt-4 shadow-2xl border border-black/5"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+              className="lg:hidden overflow-hidden bg-white/95 backdrop-blur-2xl rounded-[32px] mt-2 shadow-2xl border border-black/5"
             >
-              <div className="py-8 px-6 space-y-1 text-center">
+              <div className="py-6 px-6 space-y-1">
                 {navigationItems.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
                     onClick={scrollToSection}
-                    className="block px-6 py-4 text-sm font-bold uppercase tracking-widest text-[#1D1D1F] hover:text-[#0066CC] transition-colors"
+                    className="block px-4 py-3.5 text-base font-semibold text-[#1D1D1F] hover:bg-[#F5F5F7] hover:text-[#0066CC] rounded-xl transition-all"
                   >
                     {item.label}
                   </a>
                 ))}
-                <div className="border-t border-black/5 my-6 mx-12"></div>
-                <div className="flex flex-col space-y-8 items-center py-4">
-                  <div className="flex space-x-8">
-                    <button onClick={() => setCurrentLang('zh-TW')} className={`text-xs uppercase font-bold tracking-widest ${currentLang === 'zh-TW' ? 'text-[#0066CC]' : 'text-[#86868B]'}`}>繁中</button>
-                    <button onClick={() => setCurrentLang('en')} className={`text-xs uppercase font-bold tracking-widest ${currentLang === 'en' ? 'text-[#0066CC]' : 'text-[#86868B]'}`}>EN</button>
+                
+                <div className="h-px bg-black/5 my-4 mx-4"></div>
+                
+                <div className="flex justify-between items-center px-4 py-2">
+                  <span className="text-sm font-medium text-[#86868B]">Language</span>
+                  <div className="flex bg-[#F5F5F7] rounded-full p-1">
+                    <button 
+                      onClick={() => setCurrentLang('zh-TW')} 
+                      className={`px-3 py-1 text-xs font-bold rounded-full transition-all ${
+                        currentLang === 'zh-TW' ? 'bg-white shadow-sm text-[#1D1D1F]' : 'text-[#86868B]'
+                      }`}
+                    >
+                      繁中
+                    </button>
+                    <button 
+                      onClick={() => setCurrentLang('en')} 
+                      className={`px-3 py-1 text-xs font-bold rounded-full transition-all ${
+                        currentLang === 'en' ? 'bg-white shadow-sm text-[#1D1D1F]' : 'text-[#86868B]'
+                      }`}
+                    >
+                      EN
+                    </button>
                   </div>
+                </div>
+
+                <div className="pt-4 px-2">
                   <a
                     href="#contact"
                     onClick={scrollToSection}
-                    className="w-full max-w-[200px] px-6 py-4 text-xs font-bold uppercase tracking-widest bg-[#1D1D1F] text-white rounded-full shadow-lg"
+                    className="block w-full py-3.5 text-center text-sm font-bold bg-[#0066CC] text-white rounded-full shadow-lg active:scale-95 transition-transform"
                   >
                     {t.nav.getStarted}
                   </a>
