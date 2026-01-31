@@ -35,7 +35,6 @@ export function Footer({ t }: FooterProps) {
     ],
     company: [
       { label: '關於我們', href: '#about' },
-      { label: '團隊介紹', href: '#team' },
       { label: '合作夥伴', href: '#partners' },
       { label: '最新消息', href: '#' }
     ],

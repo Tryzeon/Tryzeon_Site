@@ -83,10 +83,6 @@ export const translations = {
       desc: '以 AI 為核心導入時尚產業，讓科技融入時尚新生活，用 AI 重塑時尚零售，並打造新世代的時尚生態。Tryzeon 直接與中小型時尚品牌合作，將虛擬試穿融入行銷與導購流程，打造可運作的商業閉環。',
       mission: 'AI 虛擬試穿，時尚生態系統',
     },
-    team: {
-      title: '團隊潛力',
-      desc: '我們有資訊技術背景，能解決 AI 模型的難題；有統計背景，能為合作店家監測使用產品後的數據量化；有企管背景，對市場分析、商業模式更為敏感；也有有創業經驗的夥伴，對創業過程更為了解，對創業機會更為敏感。',
-    },
     partners: {
       title: '合作夥伴',
       desc: '感謝以下品牌與我們一起打造時尚科技的未來',
@@ -195,10 +191,6 @@ export const translations = {
     about: {
       title: 'About Tryzeon',
       desc: 'Tryzeon is an AI × Fashion Tech startup dedicated to making fashion shopping smarter and more personalized through AI virtual try-on technology. We are not just a tech company, but a platform connecting consumers, brands, and creators.',
-    },
-    team: {
-      title: 'Our Team',
-      desc: 'The Tryzeon team consists of professionals from fashion, technology, and design. We believe technology can make fashion better.',
     },
     partners: {
       title: 'Our Partners',
