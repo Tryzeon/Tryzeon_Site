@@ -173,9 +173,6 @@ export default function TryzeonLanding() {
               title={t.features.videoGeneration.title}
               description={t.features.videoGeneration.desc}
               icon={<Video />}
-              graphic={
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#E0F2FF]/50 to-transparent opacity-50" />
-              }
             />
 
             {/* Feature 3: AI Recommendation */}
