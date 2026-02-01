@@ -66,7 +66,7 @@ export function Product3DShowcase({
       >
         {/* 3D Card Container */}
         <div 
-          className="relative rounded-[40px] overflow-hidden bg-gradient-to-br from-white to-[#F5F5F7] shadow-2xl border border-white/50"
+          className="relative rounded-[32px] md:rounded-[40px] overflow-hidden bg-gradient-to-br from-white to-[#F5F5F7] shadow-2xl border border-white/50"
           style={{ transformStyle: 'preserve-3d' }}
         >
           {/* Floating Product Image */}

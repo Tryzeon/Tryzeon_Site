@@ -97,7 +97,7 @@ export default function TryzeonLanding() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             {/* B2B小型服飾品牌 */}
             <ScrollZoomCard>
-              <div className="group bg-[#F5F5F7] rounded-[40px] md:rounded-[48px] p-10 md:p-16 h-full flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl transition-all duration-700">
+              <div className="group bg-[#F5F5F7] rounded-[32px] md:rounded-[48px] p-10 md:p-16 h-full flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl transition-all duration-700">
                 <div className="max-w-md">
                   <span className="text-[#86868B] text-xs md:text-sm font-bold uppercase tracking-widest mb-4 block">01 / Brand Solutions</span>
                   <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#1D1D1F] mb-6 md:mb-8 leading-tight">低成本提升視覺<br />吸引力與轉換率</h3>
@@ -123,7 +123,7 @@ export default function TryzeonLanding() {
 
             {/* B2C一般用戶 */}
             <ScrollZoomCard>
-              <div className="group bg-[#F5F5F7] rounded-[40px] md:rounded-[48px] p-10 md:p-16 h-full flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl transition-all duration-700">
+              <div className="group bg-[#F5F5F7] rounded-[32px] md:rounded-[48px] p-10 md:p-16 h-full flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl transition-all duration-700">
                 <div className="max-w-md">
                   <span className="text-[#86868B] text-xs md:text-sm font-bold uppercase tracking-widest mb-4 block">02 / Personal Experience</span>
                   <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#1D1D1F] mb-6 md:mb-8 leading-tight">告別試穿煩惱<br />遇見最美的自己</h3>

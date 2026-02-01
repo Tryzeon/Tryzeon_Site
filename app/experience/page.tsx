@@ -206,7 +206,7 @@ export default function ExperiencePage() {
 
             <ScrollReveal direction="right">
               <div className="relative">
-                <div className="aspect-square bg-gradient-to-br from-[#0066CC]/10 to-[#0066CC]/5 rounded-[40px] overflow-hidden">
+                <div className="aspect-square bg-gradient-to-br from-[#0066CC]/10 to-[#0066CC]/5 rounded-[32px] md:rounded-[40px] overflow-hidden">
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center">
                       <Sparkles className="w-16 h-16 text-[#0066CC]/40 mx-auto mb-4" />
