@@ -48,7 +48,7 @@ export default function ExperiencePage() {
       <Navigation currentLang={currentLang} setCurrentLang={setCurrentLang} />
 
       {/* Hero Section */}
-      <Section id="hero" className="pt-32 pb-24 md:pt-48 md:pb-32 bg-white">
+      <Section id="hero" className="pt-24 pb-20 md:pt-48 md:pb-32 bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <ScrollReveal direction="up">
             <div className="text-center mb-16 md:mb-24">
@@ -142,7 +142,7 @@ export default function ExperiencePage() {
       </Section>
 
       {/* How it works */}
-      <Section id="demo" className="py-24 md:py-32 bg-[#F5F5F7]">
+      <Section id="demo" className="py-20 md:py-32 bg-[#F5F5F7]">
         <div className="max-w-6xl mx-auto px-6">
           <ScrollReveal direction="up">
             <div className="text-center mb-16 md:mb-24">
@@ -173,7 +173,7 @@ export default function ExperiencePage() {
       </Section>
 
       {/* Features Grid */}
-      <Section id="features" className="py-24 md:py-32 bg-white">
+      <Section id="features" className="py-20 md:py-32 bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             <ScrollReveal direction="left">
@@ -221,7 +221,7 @@ export default function ExperiencePage() {
       </Section>
 
       {/* Platform Support */}
-      <Section id="platform" className="py-24 md:py-32 bg-[#F5F5F7]">
+      <Section id="platform" className="py-20 md:py-32 bg-[#F5F5F7]">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <ScrollReveal direction="up">
             <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#0066CC] mb-4">Platform</h2>
@@ -257,7 +257,7 @@ export default function ExperiencePage() {
       </Section>
 
       {/* Waitlist CTA */}
-      <Section id="waitlist" className="py-32 md:py-48 bg-[#1D1D1F] relative overflow-hidden">
+      <Section id="waitlist" className="py-24 md:py-48 bg-[#1D1D1F] relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,102,204,0.15)_0%,transparent_70%)]" />
         </div>
