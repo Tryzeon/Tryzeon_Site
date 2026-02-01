@@ -102,7 +102,7 @@ export default function ExperiencePage() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center text-white">
                     <motion.div
-                      className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center mx-auto mb-6 cursor-pointer"
+                      className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-6 cursor-pointer"
                       whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.2)' }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -259,7 +259,7 @@ export default function ExperiencePage() {
       {/* Waitlist CTA */}
       <Section id="waitlist" className="py-32 md:py-48 bg-[#1D1D1F] relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#0066CC]/20 rounded-full blur-[120px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,102,204,0.15)_0%,transparent_70%)]" />
         </div>
 
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">

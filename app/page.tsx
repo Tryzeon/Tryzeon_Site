@@ -239,7 +239,7 @@ export default function TryzeonLanding() {
                   
                   {/* Play button overlay (appears when video is not available) */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 transition-transform">
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/95 flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 transition-transform">
                       <div className="w-0 h-0 border-t-[10px] md:border-t-[12px] border-t-transparent border-l-[16px] md:border-l-[20px] border-l-[#1D1D1F] border-b-[10px] md:border-b-[12px] border-b-transparent ml-1"></div>
                     </div>
                   </div>
@@ -327,7 +327,7 @@ export default function TryzeonLanding() {
       <Section id="contact" className="py-32 md:py-56 bg-[#1D1D1F] relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-gradient-to-br from-[#0066CC]/20 to-[#0066CC]/5 rounded-full blur-[120px] animate-pulse-glow"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-[radial-gradient(circle,rgba(0,102,204,0.15)_0%,transparent_70%)] animate-pulse-glow"></div>
         </div>
 
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
