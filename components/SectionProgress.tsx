@@ -76,8 +76,8 @@ export function SectionProgress({
             className="py-4 px-2 rounded-full"
             style={{
               background: 'rgba(255, 255, 255, 0.8)',
-              backdropFilter: 'blur(20px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+              backdropFilter: 'saturate(180%)',
+              WebkitBackdropFilter: 'saturate(180%)',
               boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
               border: '1px solid rgba(255, 255, 255, 0.3)',
             }}
@@ -106,7 +106,6 @@ export function SectionProgress({
                       className="px-3 py-1.5 rounded-lg text-xs font-medium text-[#1D1D1F]"
                       style={{
                         background: 'rgba(255, 255, 255, 0.95)',
-                        backdropFilter: 'blur(10px)',
                         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
                       }}
                     >

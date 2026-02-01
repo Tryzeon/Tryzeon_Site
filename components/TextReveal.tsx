@@ -129,14 +129,12 @@ interface LineProps {
 function Line({ children, progress, range, className }: LineProps) {
   const opacity = useTransform(progress, range, [0, 1]);
   const y = useTransform(progress, range, [30, 0]);
-  const blur = useTransform(progress, range, [4, 0]);
 
   return (
     <motion.div
       style={{ 
         opacity, 
-        y,
-        filter: useTransform(blur, (b) => `blur(${b}px)`)
+        y
       }}
       className={className}
     >
@@ -228,15 +226,13 @@ export function ParagraphReveal({ children, className = '' }: ParagraphRevealPro
 
   const opacity = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
   const y = useTransform(scrollYProgress, [0, 1], [40, 0]);
-  const blur = useTransform(scrollYProgress, [0, 1], [8, 0]);
 
   return (
     <motion.div
       ref={ref}
       style={{ 
         opacity, 
-        y,
-        filter: useTransform(blur, (b) => `blur(${b}px)`)
+        y
       }}
       className={className}
     >

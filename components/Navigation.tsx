@@ -74,7 +74,7 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
       <div 
         className={`max-w-7xl mx-auto transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
           isScrolled
-            ? 'rounded-full bg-white/70 shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-white/20 backdrop-blur-xl saturate-150 px-6 py-2 max-w-5xl'
+            ? 'rounded-full bg-white/95 shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-white/20 saturate-150 px-6 py-2 max-w-5xl'
             : 'px-6 md:px-12 xl:px-24 bg-transparent'
         }`}
       >
@@ -117,7 +117,7 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 4, scale: 0.98 }}
                     transition={{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 rounded-2xl shadow-2xl border border-white/20 py-2 overflow-hidden bg-white/80 backdrop-blur-2xl"
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 rounded-2xl shadow-2xl border border-white/20 py-2 overflow-hidden bg-white/95"
                   >
                     <div className="px-2 py-1 space-y-1">
                       {productMenuItems.map((item, index) => (
@@ -177,7 +177,7 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full right-0 mt-3 w-32 bg-white/90 backdrop-blur-xl rounded-xl shadow-xl border border-black/5 py-1.5 overflow-hidden"
+                    className="absolute top-full right-0 mt-3 w-32 bg-white/95 rounded-xl shadow-xl border border-black/5 py-1.5 overflow-hidden"
                   >
                     <button
                       onClick={() => { setCurrentLang('zh-TW'); setShowLangMenu(false); }}
@@ -203,7 +203,7 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
               className={`px-5 py-2 text-[12px] font-bold rounded-full transition-all duration-300 ${
                 isScrolled
                   ? 'bg-[#1D1D1F] text-white hover:bg-[#000000] hover:scale-105 shadow-md'
-                  : 'bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20'
+                  : 'bg-white/10 border border-white/20 text-white hover:bg-white/20'
               }`}
             >
               {t.nav.getStarted}
@@ -232,7 +232,7 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
-              className="lg:hidden overflow-hidden bg-white/95 backdrop-blur-2xl rounded-[32px] mt-2 shadow-2xl border border-black/5"
+              className="lg:hidden overflow-hidden bg-white/95 rounded-[32px] mt-2 shadow-2xl border border-black/5"
             >
               <div className="py-6 px-6 space-y-1">
                 {navigationItems.map((item) => (

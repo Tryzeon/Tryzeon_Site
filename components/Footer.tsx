@@ -65,7 +65,7 @@ export function Footer({ t }: FooterProps) {
               <input
                 type="email"
                 placeholder="輸入您的 Email"
-                className="px-6 py-4 bg-white/5 border border-white/10 rounded-full text-white placeholder:text-white/30 focus:outline-none focus:border-[#0066CC] focus:bg-white/10 transition-all w-full sm:w-80 backdrop-blur-sm"
+                className="px-6 py-4 bg-white/5 border border-white/10 rounded-full text-white placeholder:text-white/30 focus:outline-none focus:border-[#0066CC] focus:bg-white/10 transition-all w-full sm:w-80"
               />
               <button className="px-8 py-4 bg-[#0066CC] hover:bg-[#0077ED] text-white rounded-full font-bold transition-all hover:scale-105 active:scale-95 whitespace-nowrap shadow-lg shadow-[#0066CC]/20">
                 訂閱

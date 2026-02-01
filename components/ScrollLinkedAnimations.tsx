@@ -36,16 +36,15 @@ export function ParallaxText({ children, className = '' }: ParallaxTextProps) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, scale: 0.95, y: 30, filter: 'blur(8px)' }}
+      initial={{ opacity: 0, scale: 0.95, y: 30 }}
       animate={isInView 
-        ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' } 
-        : { opacity: 0, scale: 0.95, y: 30, filter: 'blur(8px)' }
+        ? { opacity: 1, scale: 1, y: 0 } 
+        : { opacity: 0, scale: 0.95, y: 30 }
       }
       transition={{ 
         duration: 0.9, 
         ease: appleEasing.decelerate,
-        scale: { duration: 1.0, ease: appleEasing.emphasized },
-        filter: { duration: 1.2, ease: appleEasing.standard }
+        scale: { duration: 1.0, ease: appleEasing.emphasized }
       }}
       className={className}
     >
@@ -157,16 +156,15 @@ export function ScrollZoomCard({ children, className = '' }: ScrollZoomCardProps
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, scale: 0.94, y: 35, filter: 'blur(6px)' }}
+      initial={{ opacity: 0, scale: 0.94, y: 35 }}
       animate={isInView 
-        ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' } 
-        : { opacity: 0, scale: 0.94, y: 35, filter: 'blur(6px)' }
+        ? { opacity: 1, scale: 1, y: 0 } 
+        : { opacity: 0, scale: 0.94, y: 35 }
       }
       transition={{ 
         duration: 0.8, 
         ease: appleEasing.decelerate,
-        scale: { duration: 0.9, ease: appleEasing.emphasized },
-        filter: { duration: 1.0 }
+        scale: { duration: 0.9, ease: appleEasing.emphasized }
       }}
       className={className}
     >
@@ -539,10 +537,10 @@ export function Scroll3D({ children, className = '' }: Scroll3DProps) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 25, rotateX: 8, filter: 'blur(4px)' }}
+      initial={{ opacity: 0, y: 25, rotateX: 8 }}
       animate={isInView 
-        ? { opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' } 
-        : { opacity: 0, y: 25, rotateX: 8, filter: 'blur(4px)' }
+        ? { opacity: 1, y: 0, rotateX: 0 } 
+        : { opacity: 0, y: 25, rotateX: 8 }
       }
       transition={{ 
         duration: 0.8, 

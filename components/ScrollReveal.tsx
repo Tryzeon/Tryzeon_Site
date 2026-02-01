@@ -53,23 +53,23 @@ export function ScrollReveal({
     switch (direction) {
       case 'up':
         return {
-          hidden: { y: distance, opacity: 0, filter: 'blur(4px)' },
-          visible: { y: 0, opacity: 1, filter: 'blur(0px)' }
+          hidden: { y: distance, opacity: 0 },
+          visible: { y: 0, opacity: 1 }
         };
       case 'down':
         return {
-          hidden: { y: -distance, opacity: 0, filter: 'blur(4px)' },
-          visible: { y: 0, opacity: 1, filter: 'blur(0px)' }
+          hidden: { y: -distance, opacity: 0 },
+          visible: { y: 0, opacity: 1 }
         };
       case 'left':
         return {
-          hidden: { x: -distance, opacity: 0, filter: 'blur(4px)' },
-          visible: { x: 0, opacity: 1, filter: 'blur(0px)' }
+          hidden: { x: -distance, opacity: 0 },
+          visible: { x: 0, opacity: 1 }
         };
       case 'right':
         return {
-          hidden: { x: distance, opacity: 0, filter: 'blur(4px)' },
-          visible: { x: 0, opacity: 1, filter: 'blur(0px)' }
+          hidden: { x: distance, opacity: 0 },
+          visible: { x: 0, opacity: 1 }
         };
       case 'fade':
         return {
@@ -78,8 +78,8 @@ export function ScrollReveal({
         };
       default:
         return {
-          hidden: { y: distance, opacity: 0, filter: 'blur(4px)' },
-          visible: { y: 0, opacity: 1, filter: 'blur(0px)' }
+          hidden: { y: distance, opacity: 0 },
+          visible: { y: 0, opacity: 1 }
         };
     }
   };
@@ -95,8 +95,7 @@ export function ScrollReveal({
         delay,
         ease: appleEasing.decelerate,
         // 為不同屬性設定不同的過渡時間
-        opacity: { duration: duration * 0.8, ease: appleEasing.standard },
-        filter: { duration: duration * 1.2, ease: appleEasing.gentle }
+        opacity: { duration: duration * 0.8, ease: appleEasing.standard }
       }}
       className={className}
     >
@@ -167,23 +166,23 @@ export function StaggerItem({
     switch (direction) {
       case 'up':
         return {
-          hidden: { y: distance, opacity: 0, filter: 'blur(4px)' },
-          visible: { y: 0, opacity: 1, filter: 'blur(0px)' }
+          hidden: { y: distance, opacity: 0 },
+          visible: { y: 0, opacity: 1 }
         };
       case 'down':
         return {
-          hidden: { y: -distance, opacity: 0, filter: 'blur(4px)' },
-          visible: { y: 0, opacity: 1, filter: 'blur(0px)' }
+          hidden: { y: -distance, opacity: 0 },
+          visible: { y: 0, opacity: 1 }
         };
       case 'left':
         return {
-          hidden: { x: -distance, opacity: 0, filter: 'blur(4px)' },
-          visible: { x: 0, opacity: 1, filter: 'blur(0px)' }
+          hidden: { x: -distance, opacity: 0 },
+          visible: { x: 0, opacity: 1 }
         };
       case 'right':
         return {
-          hidden: { x: distance, opacity: 0, filter: 'blur(4px)' },
-          visible: { x: 0, opacity: 1, filter: 'blur(0px)' }
+          hidden: { x: distance, opacity: 0 },
+          visible: { x: 0, opacity: 1 }
         };
       case 'fade':
         return {
@@ -192,8 +191,8 @@ export function StaggerItem({
         };
       default:
         return {
-          hidden: { y: distance, opacity: 0, filter: 'blur(4px)' },
-          visible: { y: 0, opacity: 1, filter: 'blur(0px)' }
+          hidden: { y: distance, opacity: 0 },
+          visible: { y: 0, opacity: 1 }
         };
     }
   };
@@ -237,17 +236,16 @@ export function ScaleReveal({
   return (
     <motion.div
       ref={ref}
-      initial={{ scale: 0.92, opacity: 0, filter: 'blur(8px)' }}
+      initial={{ scale: 0.92, opacity: 0 }}
       animate={isInView 
-        ? { scale: 1, opacity: 1, filter: 'blur(0px)' } 
-        : { scale: 0.92, opacity: 0, filter: 'blur(8px)' }
+        ? { scale: 1, opacity: 1 } 
+        : { scale: 0.92, opacity: 0 }
       }
       transition={{
         duration,
         delay,
         ease: appleEasing.decelerate,
-        scale: { duration: duration * 1.1, ease: appleEasing.emphasized },
-        filter: { duration: duration * 1.3, ease: appleEasing.gentle }
+        scale: { duration: duration * 1.1, ease: appleEasing.emphasized }
       }}
       className={className}
     >

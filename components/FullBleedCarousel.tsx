@@ -242,14 +242,14 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
       <div className="absolute right-8 md:right-12 bottom-28 sm:bottom-32 z-30 flex space-x-3 opacity-0 group-hover:opacity-100 transition-all duration-500">
         <button
           onClick={(e) => { e.stopPropagation(); prev(); }}
-          className="p-4 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/25 hover:scale-110 transition-all duration-300 text-white shadow-lg"
+          className="p-4 rounded-full bg-white/10 border border-white/20 hover:bg-white/25 hover:scale-110 transition-all duration-300 text-white shadow-lg"
           aria-label="Previous slide"
         >
           <ArrowLeft size={22} strokeWidth={2} />
         </button>
         <button
           onClick={(e) => { e.stopPropagation(); next(); }}
-          className="p-4 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/25 hover:scale-110 transition-all duration-300 text-white shadow-lg"
+          className="p-4 rounded-full bg-white/10 border border-white/20 hover:bg-white/25 hover:scale-110 transition-all duration-300 text-white shadow-lg"
           aria-label="Next slide"
         >
           <ArrowRight size={22} strokeWidth={2} />
@@ -257,7 +257,7 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
       </div>
 
       {/* Navigation Dots - Apple Capsule Style */}
-      <div className="absolute left-1/2 bottom-10 z-30 flex -translate-x-1/2 space-x-2 bg-black/20 backdrop-blur-md rounded-full px-4 py-2">
+      <div className="absolute left-1/2 bottom-10 z-30 flex -translate-x-1/2 space-x-2 bg-black/40 rounded-full px-4 py-2">
         {slides.map((_, i) => (
           <button
             key={i}

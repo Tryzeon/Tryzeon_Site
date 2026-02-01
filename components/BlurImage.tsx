@@ -195,10 +195,7 @@ export function FadeInImage({
 export function generateBlurDataURL(width: number, height: number, color: string = '#F5F5F7'): string {
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}">
-      <filter id="b" color-interpolation-filters="sRGB">
-        <feGaussianBlur stdDeviation="20" />
-      </filter>
-      <rect width="100%" height="100%" fill="${color}" filter="url(#b)" />
+      <rect width="100%" height="100%" fill="${color}" />
     </svg>
   `;
   
@@ -225,11 +222,8 @@ export function generateGradientBlur(
           <stop offset="0%" stop-color="${colorStart}" />
           <stop offset="100%" stop-color="${colorEnd}" />
         </linearGradient>
-        <filter id="b" color-interpolation-filters="sRGB">
-          <feGaussianBlur stdDeviation="20" />
-        </filter>
       </defs>
-      <rect width="100%" height="100%" fill="url(#g)" filter="url(#b)" />
+      <rect width="100%" height="100%" fill="url(#g)" />
     </svg>
   `;
   

@@ -106,7 +106,7 @@ export function Product3DShowcase({
 
         {/* Shadow */}
         <div 
-          className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[80%] h-16 bg-black/20 blur-2xl rounded-full"
+          className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[80%] h-16 bg-black/20 rounded-full"
           style={{ transform: 'translateZ(-50px)' }}
         />
       </motion.div>

@@ -108,13 +108,13 @@ export function UseCases({ title, subtitle, cases }: UseCasesProps) {
                     >
                       {/* 佔位圖標 */}
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <Icon className="w-32 h-32 opacity-20" style={{ color: useCase.color }} />
+                        <Icon className="w-32 h-32 opacity-10" style={{ color: useCase.color }} />
                       </div>
                       
                       {/* 裝飾性元素 */}
-                      <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl opacity-20"
+                      <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10"
                            style={{ backgroundColor: useCase.color }} />
-                      <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full blur-3xl opacity-20"
+                      <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-10"
                            style={{ backgroundColor: useCase.color }} />
                     </div>
                   </ScrollReveal>
