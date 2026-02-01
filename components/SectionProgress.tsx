@@ -75,9 +75,7 @@ export function SectionProgress({
           <div 
             className="py-4 px-2 rounded-full"
             style={{
-              background: 'rgba(255, 255, 255, 0.8)',
-              backdropFilter: 'saturate(180%)',
-              WebkitBackdropFilter: 'saturate(180%)',
+              background: 'rgba(255, 255, 255, 0.95)',
               boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
               border: '1px solid rgba(255, 255, 255, 0.3)',
             }}
