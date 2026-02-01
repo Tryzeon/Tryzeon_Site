@@ -160,10 +160,9 @@ export default function TryzeonLanding() {
           </ScrollReveal>
 
           <BentoGrid>
-            {/* Feature 1: AI Virtual Try-On (Large, Dark) */}
+            {/* Feature 1: AI Virtual Try-On */}
             <BentoCard
               colSpan={2}
-              dark
               title={t.features.aiTryOn.title}
               description={t.features.aiTryOn.desc}
               icon={<Sparkles />}
