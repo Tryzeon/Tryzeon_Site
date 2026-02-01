@@ -166,9 +166,6 @@ export default function TryzeonLanding() {
               title={t.features.aiTryOn.title}
               description={t.features.aiTryOn.desc}
               icon={<Sparkles />}
-              graphic={
-                <div className="absolute right-0 bottom-0 w-1/2 h-full opacity-50 bg-gradient-to-l from-[#0066CC]/30 to-transparent" />
-              }
             />
 
             {/* Feature 2: Video Generation */}
