@@ -16,6 +16,9 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // 判斷是否應該顯示白色背景樣式（滾動後或手機選單開啟時）
+  const shouldShowWhiteBackground = isScrolled || isMobileMenuOpen;
+
   useEffect(() => {
     const handleScroll = () => {
       // 當滾動超過視窗高度（輪播圖高度）時，切換為黑色文字
@@ -73,7 +76,7 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
     >
       <div 
         className={`max-w-7xl mx-auto transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-          isScrolled
+          shouldShowWhiteBackground
             ? 'rounded-full bg-white/95 shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-white/20 saturate-150 px-6 py-2 max-w-5xl'
             : 'px-6 md:px-12 xl:px-24 bg-transparent'
         }`}
@@ -83,7 +86,7 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
           <a
             href="#"
             className={`text-2xl md:text-3xl font-display font-bold tracking-tight transition-colors duration-300 ${
-              isScrolled
+              shouldShowWhiteBackground
                 ? 'text-[#1D1D1F]'
                 : 'text-white drop-shadow-md'
             }`}
@@ -101,7 +104,7 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
             >
               <button
                 className={`flex items-center space-x-1.5 text-[13px] font-medium tracking-wide transition-colors duration-300 ${
-                  isScrolled
+                  shouldShowWhiteBackground
                     ? 'text-[#1D1D1F]/80 hover:text-[#0066CC]'
                     : 'text-white/90 hover:text-white drop-shadow-sm'
                 }`}
@@ -144,7 +147,7 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
                 href={item.href}
                 onClick={scrollToSection}
                 className={`text-[13px] font-medium tracking-wide transition-colors duration-300 ${
-                  isScrolled
+                  shouldShowWhiteBackground
                     ? 'text-[#1D1D1F]/80 hover:text-[#0066CC]'
                     : 'text-white/90 hover:text-white drop-shadow-sm'
                 }`}
@@ -161,7 +164,7 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
               <button
                 onClick={() => setShowLangMenu(!showLangMenu)}
                 className={`flex items-center space-x-1 text-[11px] font-semibold tracking-wide uppercase transition-colors duration-300 ${
-                  isScrolled
+                  shouldShowWhiteBackground
                     ? 'text-[#1D1D1F]/70 hover:text-[#1D1D1F]'
                     : 'text-white/80 hover:text-white drop-shadow-sm'
                 }`}
@@ -201,7 +204,7 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
               href="#contact"
               onClick={scrollToSection}
               className={`px-5 py-2 text-[12px] font-bold rounded-full transition-all duration-300 ${
-                isScrolled
+                shouldShowWhiteBackground
                   ? 'bg-[#1D1D1F] text-white hover:bg-[#000000] hover:scale-105 shadow-md'
                   : 'bg-white/10 border border-white/20 text-white hover:bg-white/20'
               }`}
@@ -217,9 +220,9 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMobileMenuOpen ? (
-              <X className={`w-6 h-6 ${isScrolled ? 'text-[#1D1D1F]' : 'text-white'}`} />
+              <X className={`w-6 h-6 ${shouldShowWhiteBackground ? 'text-[#1D1D1F]' : 'text-white'}`} />
             ) : (
-              <Menu className={`w-6 h-6 ${isScrolled ? 'text-[#1D1D1F]' : 'text-white'}`} />
+              <Menu className={`w-6 h-6 ${shouldShowWhiteBackground ? 'text-[#1D1D1F]' : 'text-white'}`} />
             )}
           </button>
         </div>

@@ -239,7 +239,7 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
       </div>
 
       {/* Navigation Arrows - Apple Style with Hover Reveal */}
-      <div className="absolute right-8 md:right-12 bottom-28 sm:bottom-32 z-30 flex space-x-3 opacity-0 group-hover:opacity-100 transition-all duration-500">
+      <div className="absolute right-8 md:right-12 bottom-28 sm:bottom-32 z-30 flex space-x-3 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-500">
         <button
           onClick={(e) => { e.stopPropagation(); prev(); }}
           className="p-4 rounded-full bg-white/10 border border-white/20 hover:bg-white/25 hover:scale-110 transition-all duration-300 text-white shadow-lg"

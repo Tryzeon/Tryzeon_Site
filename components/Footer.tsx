@@ -76,7 +76,7 @@ export function Footer({ t }: FooterProps) {
       </div>
 
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-6 py-20">
+      <div className="max-w-7xl mx-auto px-6 py-12 lg:py-20">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-12">
           {/* Brand Section */}
           <div className="col-span-2 md:col-span-4 lg:col-span-2 lg:pr-12">

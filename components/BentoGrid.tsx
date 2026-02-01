@@ -42,7 +42,7 @@ export function BentoCard({
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
       className={`
-        relative overflow-hidden rounded-[40px] p-8 md:p-10 flex flex-col justify-between h-full group
+        relative overflow-hidden rounded-[32px] md:rounded-[40px] p-8 md:p-10 flex flex-col justify-between h-full group
         transition-all duration-500 will-change-transform
         hover:scale-[1.02] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)]
         ${dark 

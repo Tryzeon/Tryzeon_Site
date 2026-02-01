@@ -31,10 +31,10 @@ export default function TryzeonLanding() {
       </header>
 
       {/* Brand Statement - Apple Style: Centered & Impactful with Parallax */}
-      <Section id="statement" className="py-32 md:py-64 bg-white">
+      <Section id="statement" className="py-20 md:py-64 bg-white">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <ParallaxText>
-            <h2 className="text-5xl md:text-8xl lg:text-9xl font-bold text-[#1D1D1F] leading-[0.95] tracking-tighter mb-10 md:mb-12">
+            <h2 className="text-4xl sm:text-5xl md:text-8xl lg:text-9xl font-bold text-[#1D1D1F] leading-[0.95] tracking-tighter mb-10 md:mb-12">
               The Future of <br />
               <span className="text-[#0066CC]">Digital Style</span>
             </h2>
@@ -56,7 +56,7 @@ export default function TryzeonLanding() {
       </Section>
 
       {/* Market Stats - Apple Style: Clean Grid */}
-      <Section id="stats" className="py-24 md:py-48 bg-[#F5F5F7]">
+      <Section id="stats" className="py-20 md:py-48 bg-[#F5F5F7]">
         <div className="max-w-6xl mx-auto px-6">
           <ScrollReveal direction="up">
             <div className="text-center mb-16 md:mb-24">
@@ -87,9 +87,9 @@ export default function TryzeonLanding() {
       </Section>
 
       {/* Target Audience - Apple Style: Product Focus Cards */}
-      <Section id="audience" className="py-32 md:py-56 bg-white">
+      <Section id="audience" className="py-20 md:py-56 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <ScrollReveal direction="up" className="text-center mb-20 md:mb-32">
+          <ScrollReveal direction="up" className="text-center mb-16 md:mb-32">
             <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#0066CC] mb-4 md:mb-6">Tailored Solutions</h2>
             <h2 className="text-4xl md:text-7xl font-bold text-[#1D1D1F] tracking-tight">為誰而設計</h2>
           </ScrollReveal>
@@ -152,7 +152,7 @@ export default function TryzeonLanding() {
       </Section>
 
       {/* Features Section - Apple Style: Bento Grid */}
-      <Section id="features" className="py-24 md:py-48 bg-[#F5F5F7]">
+      <Section id="features" className="py-20 md:py-48 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
           <ScrollReveal direction="up" className="text-center mb-16 md:mb-24">
             <h1 className="text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-[#86868B] mb-4 md:mb-6">Core Technology</h1>
@@ -269,7 +269,7 @@ export default function TryzeonLanding() {
       </Section>
 
       {/* About Section - Apple Style: Focused Vision */}
-      <Section id="about" className="py-24 md:py-48 bg-white">
+      <Section id="about" className="py-20 md:py-48 bg-white">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <ScrollReveal direction="up">
             <div className="w-20 h-20 md:w-24 md:h-24 bg-[#F5F5F7] rounded-3xl flex items-center justify-center mx-auto mb-8 md:mb-12">
@@ -304,7 +304,7 @@ export default function TryzeonLanding() {
       )}
 
       {/* FAQ Section - Apple Style: Clean Accordion */}
-      <Section id="faq" className="py-24 md:py-48 bg-[#F5F5F7]">
+      <Section id="faq" className="py-20 md:py-48 bg-[#F5F5F7]">
         <div className="max-w-4xl mx-auto px-6">
           <ScrollReveal direction="up">
             <div className="text-center mb-16 md:mb-24">
@@ -324,7 +324,7 @@ export default function TryzeonLanding() {
       </Section>
 
       {/* Contact/CTA Section - Apple Style: High Impact Dark Mode */}
-      <Section id="contact" className="py-32 md:py-56 bg-[#1D1D1F] relative overflow-hidden">
+      <Section id="contact" className="py-24 md:py-56 bg-[#1D1D1F] relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-[radial-gradient(circle,rgba(0,102,204,0.15)_0%,transparent_70%)] animate-pulse-glow"></div>
