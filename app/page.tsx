@@ -285,6 +285,8 @@ export default function TryzeonLanding() {
       </Section>
 
       {/* Partner Logos Section - Apple Style: Glass Floating */}
+      {/* TODO: 待與品牌正式簽約後，將 SHOW_PARTNERS 改為 true 即可恢復顯示 */}
+      {false && (
       <Section id="partners" className="py-24 md:py-48 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
           <ScrollReveal direction="up">
@@ -299,6 +301,7 @@ export default function TryzeonLanding() {
           </ScrollReveal>
         </div>
       </Section>
+      )}
 
       {/* FAQ Section - Apple Style: Clean Accordion */}
       <Section id="faq" className="py-24 md:py-48 bg-[#F5F5F7]">
