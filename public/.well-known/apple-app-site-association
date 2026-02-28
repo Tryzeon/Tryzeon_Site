@@ -5,7 +5,7 @@
       {
         "appID": "ZRT8ZB9565.com.tryzeon.app",
         "paths": [
-          "/shop/*",
+          "/store/*",
           "/product/*"
         ]
       }
