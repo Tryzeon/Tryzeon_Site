@@ -21,13 +21,13 @@ function SlideImage({ src, alt, isActive, priority, index }: { src: string; alt:
   return (
     <motion.div
       initial={{ scale: variant.scale[0], x: variant.x?.[0] || 0, y: variant.y?.[0] || 0 }}
-      animate={isActive ? { 
-        scale: variant.scale[1], 
-        x: variant.x?.[1] || 0, 
-        y: variant.y?.[1] || 0 
+      animate={isActive ? {
+        scale: variant.scale[1],
+        x: variant.x?.[1] || 0,
+        y: variant.y?.[1] || 0
       } : {}}
       transition={{ duration: 12, ease: "linear" }}
-      className="relative h-full w-full"
+      className="relative h-full w-full will-change-transform"
     >
       <Image
         src={src}
@@ -175,7 +175,7 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               {currentSlide?.kicker && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
@@ -185,7 +185,7 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
                 </motion.div>
               )}
               {currentSlide?.title && (
-                <motion.h1 
+                <motion.h1
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
@@ -196,7 +196,7 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
                 </motion.h1>
               )}
               {currentSlide?.desc && (
-                <motion.p 
+                <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
@@ -257,30 +257,25 @@ export function FullBleedCarousel({ slides, auto = false, interval = DEFAULT_INT
       </div>
 
       {/* Navigation Dots - Apple Capsule Style */}
-      <div className="absolute left-1/2 bottom-10 z-30 flex -translate-x-1/2 space-x-2 bg-black/40 rounded-full px-4 py-2">
+      <div className="absolute left-1/2 bottom-10 z-30 flex -translate-x-1/2 space-x-1 bg-black/40 rounded-full px-3 py-2.5" role="tablist" aria-label="Carousel navigation">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => go(i)}
-            className={`rounded-full transition-all duration-500 ease-out ${i === currentIndex 
-              ? 'w-8 h-2 bg-white shadow-lg' 
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center -my-1"
+            aria-label={`Go to slide ${i + 1} of ${slides.length}`}
+            aria-selected={i === currentIndex}
+            role="tab"
+          >
+            <span className={`rounded-full transition-all duration-500 ease-out ${i === currentIndex
+              ? 'w-8 h-2 bg-white shadow-lg'
               : 'w-2 h-2 bg-white/40 hover:bg-white/70 hover:scale-125'
-            }`}
-            aria-label={`Go to slide ${i + 1}`}
-          />
+              }`} />
+          </button>
         ))}
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div 
-        className="absolute left-1/2 bottom-4 z-30 -translate-x-1/2 opacity-60 group-hover:opacity-100 transition-opacity"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <div className="w-6 h-10 rounded-full border-2 border-white/50 flex justify-center pt-2">
-          <div className="w-1 h-2 bg-white/70 rounded-full"></div>
-        </div>
-      </motion.div>
     </div>
   );
 }
+

@@ -1,6 +1,7 @@
 'use client';
 
-import { Instagram, Mail, Linkedin, MapPin, ArrowUpRight } from 'lucide-react';
+import { useState } from 'react';
+import { Instagram, Mail, Linkedin, MapPin, Check, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
 interface FooterProps {
@@ -25,24 +26,69 @@ interface FooterProps {
 
 export function Footer({ t }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLScu_hKsOTUVcuB0R3sKnRh9cAbn7zchO7W8izdgG1N9-WC9AQ/formResponse';
+  // Google Form email field entry ID — update this if the form changes
+  const EMAIL_ENTRY = 'entry.1045781291';
+
+  const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg('');
+
+    if (!email.trim()) {
+      setErrorMsg('請輸入 Email 地址');
+      setStatus('error');
+      return;
+    }
+    if (!validateEmail(email)) {
+      setErrorMsg('請輸入有效的 Email 格式');
+      setStatus('error');
+      return;
+    }
+
+    setStatus('loading');
+
+    try {
+      const formData = new URLSearchParams();
+      formData.append(EMAIL_ENTRY, email);
+
+      await fetch(GOOGLE_FORM_ACTION, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData.toString(),
+      });
+
+      // no-cors always resolves — treat as success
+      setStatus('success');
+      setEmail('');
+      setTimeout(() => setStatus('idle'), 4000);
+    } catch {
+      setErrorMsg('送出失敗，請稍後再試');
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
+    }
+  };
 
   const footerLinks = {
     products: [
-      { label: t.footer.aiVirtualTryOn, href: '#features' },
-      { label: t.footer.videoGeneration, href: '#features' },
-      { label: t.footer.aiRecommendation, href: '#features' },
-      { label: t.footer.dataAnalytics, href: '#features' }
+      { label: t.footer.aiVirtualTryOn, href: '/products' },
+      { label: t.footer.videoGeneration, href: '/products' },
+      { label: t.footer.aiRecommendation, href: '/products' },
+      { label: t.footer.dataAnalytics, href: '/products' }
     ],
     company: [
-      { label: '關於我們', href: '#about' },
-      { label: '合作夥伴', href: '#partners' },
-      { label: '最新消息', href: '#' }
+      { label: '關於我們', href: '/#about' },
+      { label: '創作者生態', href: '/join' },
+      { label: '立即體驗', href: '/experience' }
     ],
     resources: [
-      { label: '常見問題', href: '#faq' },
-      { label: '使用教學', href: '#' },
-      { label: 'API 文件', href: '#', external: true },
-      { label: '開發者資源', href: '#', external: true }
+      { label: '常見問題', href: '/#faq' },
     ],
     contact: [
       { label: t.footer.businessCooperation, href: '#contact' },
@@ -61,19 +107,38 @@ export function Footer({ t }: FooterProps) {
               <h3 className="text-3xl font-bold mb-3 tracking-tight">Stay Connected</h3>
               <p className="text-white/60 font-medium text-lg max-w-md">訂閱我們的電子報，獲取最新的 AI 時尚科技趨勢與產品更新。</p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-              <input
-                type="email"
-                placeholder="輸入您的 Email"
-                className="px-6 py-4 bg-white/5 border border-white/10 rounded-full text-white placeholder:text-white/30 focus:outline-none focus:border-[#0066CC] focus:bg-white/10 transition-all w-full sm:w-80"
-              />
-              <button className="px-8 py-4 bg-[#0066CC] hover:bg-[#0077ED] text-white rounded-full font-bold transition-all hover:scale-105 active:scale-95 whitespace-nowrap shadow-lg shadow-[#0066CC]/20">
-                訂閱
-              </button>
-            </div>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-full lg:w-auto">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); if (status === 'error') setStatus('idle'); }}
+                  placeholder="輸入您的 Email"
+                  disabled={status === 'loading' || status === 'success'}
+                  className={`px-6 py-4 bg-white/5 border rounded-full text-white placeholder:text-white/30 focus:outline-none focus:bg-white/10 transition-all w-full sm:w-80 disabled:opacity-50 ${status === 'error' ? 'border-red-500/60 focus:border-red-500' : 'border-white/10 focus:border-[#0066CC]'
+                    }`}
+                />
+                <button
+                  type="submit"
+                  disabled={status === 'loading' || status === 'success'}
+                  className={`px-8 py-4 rounded-full font-bold transition-all whitespace-nowrap shadow-lg disabled:cursor-not-allowed flex items-center justify-center gap-2 min-w-[120px] ${status === 'success'
+                    ? 'bg-emerald-500 shadow-emerald-500/20 scale-100'
+                    : 'bg-[#0066CC] hover:bg-[#0077ED] shadow-[#0066CC]/20 hover:scale-105 active:scale-95'
+                    }`}
+                >
+                  {status === 'loading' && <Loader2 className="h-5 w-5 animate-spin" />}
+                  {status === 'success' && <Check className="h-5 w-5" />}
+                  {status === 'loading' ? '送出中...' : status === 'success' ? '訂閱成功！' : '訂閱'}
+                </button>
+              </div>
+              {status === 'error' && errorMsg && (
+                <p className="text-red-400 text-sm pl-2 animate-pulse">{errorMsg}</p>
+              )}
+            </form>
           </div>
         </div>
       </div>
+
 
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-6 py-12 lg:py-20">
@@ -84,7 +149,7 @@ export function Footer({ t }: FooterProps) {
             <p className="text-white/50 mb-8 font-medium leading-relaxed">
               透過 AI 技術重新定義時尚體驗。我們連結創作者、品牌與消費者，打造無縫的虛擬試穿生態系。
             </p>
-            
+
             {/* Contact Info */}
             <div className="space-y-4 mb-8">
               <a href="mailto:tryzeon.team@gmail.com" className="flex items-center text-white/60 hover:text-white transition-colors text-sm group">
@@ -158,16 +223,15 @@ export function Footer({ t }: FooterProps) {
             <ul className="space-y-4">
               {footerLinks.resources.map((link, i) => (
                 <li key={i}>
-                  <Link 
-                    href={link.href} 
-                    className="text-white/70 hover:text-[#0066CC] transition-colors text-sm font-medium inline-flex items-center group"
-                    {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  <Link
+                    href={link.href}
+                    className="text-white/70 hover:text-[#0066CC] transition-colors text-sm font-medium"
                   >
                     {link.label}
-                    {link.external && <ArrowUpRight className="h-3 w-3 ml-1 opacity-50 group-hover:opacity-100" />}
                   </Link>
                 </li>
               ))}
+
             </ul>
           </div>
 

@@ -26,28 +26,28 @@ export function BentoGrid({ children, className = '' }: BentoGridProps) {
   );
 }
 
-export function BentoCard({ 
-  title, 
-  description, 
-  graphic, 
+export function BentoCard({
+  title,
+  description,
+  graphic,
   icon,
   className = '',
   dark = false,
   colSpan = 1
 }: BentoCardProps) {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       className={`
-        relative overflow-hidden rounded-[32px] md:rounded-[40px] p-8 md:p-10 flex flex-col justify-between h-full group
-        transition-all duration-500 will-change-transform
-        hover:scale-[1.02] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)]
-        ${dark 
-          ? 'bg-[#1D1D1F] text-white shadow-xl shadow-black/30 border border-white/10' 
-          : 'bg-white text-[#1D1D1F] shadow-lg shadow-black/5 border border-black/[0.03]'
+        relative overflow-hidden rounded-3xl p-8 md:p-10 flex flex-col justify-between h-full group
+        transition-all duration-400 will-change-transform
+        hover:scale-[1.02]
+        ${dark
+          ? 'bg-[#0A0A0B] text-white shadow-neo-lg border border-white/[0.06] hover:shadow-glow-blue hover:border-white/[0.1]'
+          : 'bg-white text-[#101828] shadow-neo border border-[#E4E7EC] hover:shadow-neo-lg hover:border-[#2563EB]/15'
         }
         ${colSpan === 2 ? 'md:col-span-2' : ''}
         ${colSpan === 3 ? 'md:col-span-3' : ''}
@@ -59,10 +59,10 @@ export function BentoCard({
           {icon && (
             <div className={`
               w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-2xl
-              transition-all duration-500 group-hover:scale-110 group-hover:-rotate-3
-              ${dark 
-                ? 'bg-white/10 text-white group-hover:bg-[#0066CC] group-hover:text-white' 
-                : 'bg-[#F5F5F7] text-[#0066CC] group-hover:bg-[#0066CC] group-hover:text-white'
+              transition-all duration-400 group-hover:scale-110 group-hover:-rotate-3
+              ${dark
+                ? 'bg-[#2563EB]/15 text-[#60A5FA] group-hover:bg-[#2563EB] group-hover:text-white'
+                : 'bg-gradient-to-br from-[#2563EB]/8 to-[#06B6D4]/8 text-[#2563EB] group-hover:bg-[#2563EB] group-hover:from-[#2563EB] group-hover:to-[#2563EB] group-hover:text-white'
               }
             `}>
               {icon}
@@ -70,32 +70,32 @@ export function BentoCard({
           )}
           <h3 className={`
             text-2xl md:text-3xl font-bold mb-4 tracking-tight
-            ${dark ? 'text-white' : 'text-[#1D1D1F]'}
+            ${dark ? 'text-white' : 'text-[#101828]'}
           `}>
             {title}
           </h3>
           <p className={`
-            text-base md:text-[17px] font-medium leading-relaxed max-w-[90%]
-            ${dark ? 'text-white/60 group-hover:text-white/80' : 'text-[#86868B] group-hover:text-[#1D1D1F]/80'}
+            text-[15px] md:text-[17px] font-medium leading-relaxed max-w-[90%]
+            ${dark ? 'text-white/55 group-hover:text-white/75' : 'text-[#667085] group-hover:text-[#344054]'}
             transition-colors duration-300
           `}>
             {description}
           </p>
         </div>
       </div>
-      
+
       {graphic && (
-        <div className="absolute inset-0 z-0 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105">
+        <div className="absolute inset-0 z-0 transition-transform duration-500 group-hover:scale-105">
           {graphic}
         </div>
       )}
 
-      {/* Hover Light Effect */}
+      {/* Hover Light Effect - Blue/Cyan gradient */}
       <div className={`
-        absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none
+        absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none
         ${dark
-          ? 'bg-[radial-gradient(circle_at_top_right,rgba(0,102,204,0.15),transparent_60%)]'
-          : 'bg-[radial-gradient(circle_at_top_right,rgba(0,102,204,0.05),transparent_60%)]'
+          ? 'bg-[radial-gradient(ellipse_at_top_right,rgba(37,99,235,0.12),rgba(6,182,212,0.06),transparent_70%)]'
+          : 'bg-[radial-gradient(ellipse_at_top_right,rgba(37,99,235,0.06),rgba(6,182,212,0.03),transparent_70%)]'
         }
       `} />
     </motion.div>

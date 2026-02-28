@@ -1,296 +1,258 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Upload, Sparkles, Play, ChevronRight, Check, Smartphone, Monitor, Mail } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Upload, Sparkles, Play, Smartphone, Monitor, Mail, Camera, Layers, ArrowRight } from 'lucide-react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Section } from '@/components/Section';
 import { ScrollReveal } from '@/components/ScrollReveal';
-import { AppleButton, AppleLink } from '@/components/MicroInteractions';
+import { AppleButton } from '@/components/MicroInteractions';
 import { translations } from '@/lib/translations';
-
-const appleEasing = [0.25, 0.1, 0.25, 1.0];
 
 export default function ExperiencePage() {
   const [currentLang, setCurrentLang] = useState('zh-TW');
   const t = translations[currentLang as keyof typeof translations] || translations['zh-TW'];
+  const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
     {
-      icon: <Upload className="w-8 h-8" />,
+      icon: <Camera />,
       title: '上傳照片',
-      description: '上傳一張您的全身照片，系統會自動偵測身形輪廓',
+      label: 'INPUT',
+      description: '上傳一張全身穿搭照，AI 將精準捕捉您的身形特徵。',
+      visual: (
+        <div className="relative w-full h-full flex items-center justify-center">
+          <div className="w-48 h-64 border-2 border-dashed border-[#2563EB]/30 rounded-3xl flex flex-col items-center justify-center bg-white/5 backdrop-blur-sm group-hover:border-[#2563EB]/60 transition-colors">
+            <Upload className="w-12 h-12 text-[#2563EB] mb-4 animate-bounce" />
+            <span className="text-xs font-mono text-[#667085]">DROP FILE HERE</span>
+          </div>
+        </div>
+      )
     },
     {
-      icon: <Sparkles className="w-8 h-8" />,
-      title: 'AI 智能處理',
-      description: '我們的 AI 引擎會在幾秒內完成虛擬試穿合成',
+      icon: <Layers />,
+      title: 'AI 物理模擬',
+      label: 'PROCESSING',
+      description: '我們的運算核心會即時進行布料垂墜、光影與質感模擬。',
+      visual: (
+        <div className="relative w-full h-full flex items-center justify-center">
+          <div className="relative w-48 h-64">
+            <div className="absolute inset-0 bg-[#2563EB]/10 rounded-2xl animate-pulse" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Sparkles className="w-16 h-16 text-[#2563EB] animate-spin-slow" />
+            </div>
+            {/* Blueprint lines */}
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-[#2563EB]/20 animate-scan" style={{ animationDuration: '3s' }} />
+            <div className="absolute top-1/4 left-0 w-full h-[1px] bg-[#2563EB]/20" />
+            <div className="absolute top-2/4 left-0 w-full h-[1px] bg-[#2563EB]/20" />
+            <div className="absolute top-3/4 left-0 w-full h-[1px] bg-[#2563EB]/20" />
+          </div>
+        </div>
+      )
     },
     {
-      icon: <Play className="w-8 h-8" />,
-      title: '生成試穿影片',
-      description: '獲得高品質的動態試穿影片，360° 展示穿搭效果',
+      icon: <Play />,
+      title: '生成動態影片',
+      label: 'OUTPUT',
+      description: '獲得 360° 全方位展示效果，看見服飾在真實動態下的表現。',
+      visual: (
+        <div className="relative w-full h-full flex items-center justify-center p-4">
+          <div className="w-full aspect-video bg-[#0A0A0B] rounded-2xl overflow-hidden border border-white/10 shadow-glow-blue relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#2563EB]/20 to-transparent" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Play className="w-12 h-12 text-white opacity-60" />
+            </div>
+          </div>
+        </div>
+      )
     },
-  ];
-
-  const features = [
-    '秒級生成速度',
-    '4K 高畫質輸出',
-    '支援各種服飾類型',
-    '自然的布料皺褶模擬',
-    '多角度動態展示',
-    '一鍵分享社群',
   ];
 
   return (
-    <div className="min-h-screen w-full bg-[#F5F5F7] relative overflow-hidden font-display">
+    <div className="min-h-screen w-full bg-[#FAFAFA] selection:bg-[#2563EB]/15 selection:text-[#101828] overflow-hidden">
       <Navigation currentLang={currentLang} setCurrentLang={setCurrentLang} />
 
-      {/* Hero Section */}
-      <Section id="hero" className="pt-24 pb-20 md:pt-48 md:pb-32 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
+      {/* ============================================
+          HERO — Dark Lab Visual
+          ============================================ */}
+      <Section id="hero" className="py-28 md:py-64 bg-[#0A0A0B] relative">
+        <div className="absolute inset-0 dot-grid-dark opacity-30 pointer-events-none" />
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-[10%] -left-[10%] w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(37,99,235,0.15)_0%,transparent_70%)] animate-mesh-float" />
+          <div className="absolute -bottom-[10%] -right-[10%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(6,182,212,0.1)_0%,transparent_70%)] animate-mesh-float [animation-delay:4s]" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <ScrollReveal direction="up">
-            <div className="text-center mb-16 md:mb-24">
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.6, ease: appleEasing }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-[#0066CC]/10 rounded-full text-[#0066CC] font-medium text-sm mb-6"
+            <h1 className="text-5xl md:text-9xl font-extrabold text-white tracking-tighter leading-[0.85] mb-12">
+              Beyond the<br />
+              <span className="text-gradient-blue">Magic Mirror</span>
+            </h1>
+            <p className="text-lg md:text-2xl text-[#98A2B3] font-medium max-w-3xl mx-auto mb-16 text-balance">
+              我們將 AI 轉化為最懂時尚的數位造型師。在這裡，只需一次點擊，就能跨越真實與虛擬的邊界。
+            </p>
+            <div className="flex justify-center">
+              <AppleButton
+                variant="secondary"
+                size="lg"
+                className="!bg-white !text-[#101828]"
+                onClick={() => document.getElementById('steps')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                <Sparkles className="w-4 h-4" />
-                AI 驅動的虛擬試穿
-              </motion.div>
-              
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-[#1D1D1F] tracking-tight mb-6 md:mb-8">
-                體驗未來的
-                <br />
-                <span className="text-[#0066CC]">試穿方式</span>
-              </h1>
-              
-              <p className="text-xl md:text-2xl text-[#86868B] font-medium max-w-2xl mx-auto mb-10 md:mb-12">
-                只需一張照片，即可看見服裝穿在身上的真實效果。
-                <br className="hidden md:block" />
-                無需試穿，輕鬆做出購買決定。
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <AppleButton
-                  variant="primary"
-                  size="lg"
-                  onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  觀看示範
-                  <ChevronRight className="w-5 h-5 ml-1" />
-                </AppleButton>
-                
-                <AppleButton
-                  variant="secondary"
-                  size="lg"
-                  onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  加入等候名單
-                </AppleButton>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Demo Preview */}
-          <ScrollReveal direction="up" delay={0.2}>
-            <div className="relative max-w-4xl mx-auto">
-              <div className="aspect-video bg-[#1D1D1F] rounded-[32px] md:rounded-[40px] overflow-hidden shadow-2xl border border-white/10">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <motion.div
-                      className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-6 cursor-pointer"
-                      whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.2)' }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" />
-                    </motion.div>
-                    <p className="text-lg md:text-xl font-medium text-white/80">觀看 AI 試穿示範影片</p>
-                  </div>
-                </div>
-                
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-              </div>
-              
-              {/* Floating badges */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                className="absolute -left-4 md:-left-8 top-1/4 bg-white rounded-2xl shadow-xl p-4 hidden lg:block"
-              >
-                <div className="text-sm font-bold text-[#1D1D1F]">處理時間</div>
-                <div className="text-2xl font-bold text-[#0066CC]">&lt; 5 秒</div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.7, duration: 0.5 }}
-                className="absolute -right-4 md:-right-8 bottom-1/4 bg-white rounded-2xl shadow-xl p-4 hidden lg:block"
-              >
-                <div className="text-sm font-bold text-[#1D1D1F]">輸出品質</div>
-                <div className="text-2xl font-bold text-[#0066CC]">4K Ultra HD</div>
-              </motion.div>
+                開始探索技術流程
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </AppleButton>
             </div>
           </ScrollReveal>
         </div>
       </Section>
 
-      {/* How it works */}
-      <Section id="demo" className="py-20 md:py-32 bg-[#F5F5F7]">
-        <div className="max-w-6xl mx-auto px-6">
-          <ScrollReveal direction="up">
-            <div className="text-center mb-16 md:mb-24">
-              <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#0066CC] mb-4">How It Works</h2>
-              <h3 className="text-4xl md:text-6xl font-bold text-[#1D1D1F] tracking-tight">三步驟完成試穿</h3>
-            </div>
-          </ScrollReveal>
+      {/* ============================================
+          STEPS — Visual Tech Flow
+          ============================================ */}
+      <Section id="steps" className="py-24 md:py-48 relative overflow-hidden">
+        <div className="absolute inset-0 dot-grid opacity-50 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div className="space-y-12">
+              <ScrollReveal direction="left">
+                <span className="inline-block text-xs md:text-sm font-mono font-bold uppercase tracking-[0.3em] text-[#2563EB] mb-6 bg-[#2563EB]/8 px-4 py-1.5 rounded-full">How it works</span>
+                <h2 className="text-4xl md:text-7xl font-extrabold text-[#101828] tracking-tight mb-8">三步重塑時尚呈現</h2>
 
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-            {steps.map((step, index) => (
-              <ScrollReveal key={index} direction="up" delay={index * 0.1}>
-                <motion.div
-                  className="bg-white rounded-[32px] p-8 md:p-10 text-center shadow-sm border border-black/[0.03] h-full"
-                  whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="w-16 h-16 bg-[#0066CC]/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-[#0066CC]">
-                    {step.icon}
-                  </div>
-                  <div className="text-sm font-bold text-[#0066CC] mb-2">步驟 {index + 1}</div>
-                  <h4 className="text-2xl font-bold text-[#1D1D1F] mb-4">{step.title}</h4>
-                  <p className="text-[#86868B] font-medium leading-relaxed">{step.description}</p>
-                </motion.div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* Features Grid */}
-      <Section id="features" className="py-20 md:py-32 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-            <ScrollReveal direction="left">
-              <div>
-                <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#0066CC] mb-4">Features</h2>
-                <h3 className="text-3xl md:text-5xl font-bold text-[#1D1D1F] tracking-tight mb-8">
-                  業界領先的
-                  <br />AI 試穿技術
-                </h3>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {features.map((feature, index) => (
+                <div className="space-y-6">
+                  {steps.map((step, i) => (
                     <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1, duration: 0.4 }}
-                      className="flex items-center gap-3"
+                      key={i}
+                      className={`p-8 rounded-[32px] cursor-pointer transition-all duration-400 group border ${activeStep === i
+                        ? 'bg-white shadow-neo-lg border-[#2563EB]/20'
+                        : 'bg-transparent border-transparent hover:bg-white/50'
+                        }`}
+                      onClick={() => setActiveStep(i)}
+                      onMouseEnter={() => setActiveStep(i)}
                     >
-                      <div className="w-6 h-6 rounded-full bg-[#0066CC]/10 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-4 h-4 text-[#0066CC]" />
+                      <div className="flex items-start gap-6">
+                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition-all duration-400 ${activeStep === i ? 'bg-[#2563EB] text-white shadow-glow-blue' : 'bg-[#2563EB]/8 text-[#2563EB]'
+                          }`}>
+                          {step.icon}
+                        </div>
+                        <div>
+                          <div className="text-xs font-mono font-bold tracking-widest text-[#2563EB] mb-2">{step.label}</div>
+                          <h3 className={`text-xl md:text-2xl font-bold mb-3 ${activeStep === i ? 'text-[#101828]' : 'text-[#667085]'}`}>
+                            {step.title}
+                          </h3>
+                          <p className={`text-sm md:text-base font-medium leading-relaxed ${activeStep === i ? 'text-[#475467]' : 'text-[#98A2B3]'}`}>
+                            {step.description}
+                          </p>
+                        </div>
                       </div>
-                      <span className="text-[#1D1D1F] font-medium">{feature}</span>
                     </motion.div>
                   ))}
                 </div>
-              </div>
-            </ScrollReveal>
+              </ScrollReveal>
+            </div>
 
-            <ScrollReveal direction="right">
-              <div className="relative">
-                <div className="aspect-square bg-gradient-to-br from-[#0066CC]/10 to-[#0066CC]/5 rounded-[32px] md:rounded-[40px] overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <Sparkles className="w-16 h-16 text-[#0066CC]/40 mx-auto mb-4" />
-                      <p className="text-[#86868B] font-medium">AI 處理示意圖</p>
-                    </div>
-                  </div>
+            <div className="relative">
+              <ScrollReveal direction="right">
+                <div className="aspect-[4/5] bg-white rounded-[48px] shadow-neo-xl border border-[#E4E7EC] overflow-hidden group">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeStep}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 1.05 }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="w-full h-full flex flex-col p-12"
+                    >
+                      <div className="flex-1">
+                        {steps[activeStep].visual}
+                      </div>
+                      <div className="text-center mt-8">
+                        <div className="text-xs font-mono text-[#98A2B3] tracking-[0.2em] mb-2 uppercase">Step 0{activeStep + 1} Visualization</div>
+                        <p className="text-[#101828] font-bold">Tryzeon AI Core v2.5</p>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Corner accents */}
+                  <div className="absolute top-8 left-8 w-8 h-8 border-t-2 border-l-2 border-[#2563EB]/20 rounded-tl-xl" />
+                  <div className="absolute bottom-8 right-8 w-8 h-8 border-b-2 border-r-2 border-[#2563EB]/20 rounded-br-xl" />
                 </div>
-              </div>
-            </ScrollReveal>
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </Section>
 
-      {/* Platform Support */}
-      <Section id="platform" className="py-20 md:py-32 bg-[#F5F5F7]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      {/* ============================================
+          PLATFORMS — Clean Minimalism
+          ============================================ */}
+      <Section id="platform" className="py-24 md:py-48 bg-white overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 text-center">
           <ScrollReveal direction="up">
-            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#0066CC] mb-4">Platform</h2>
-            <h3 className="text-3xl md:text-5xl font-bold text-[#1D1D1F] tracking-tight mb-12">
-              隨時隨地體驗
+            <span className="inline-block text-xs md:text-sm font-mono font-semibold tracking-[0.3em] text-[#667085] mb-12 uppercase">Ubiquitous Access</span>
+            <h3 className="text-4xl md:text-7xl font-extrabold text-[#101828] tracking-tight mb-20 md:mb-32">
+              隨時隨地，跨屏體驗
             </h3>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 md:gap-16">
-              <motion.div
-                className="flex flex-col items-center"
-                whileHover={{ scale: 1.05 }}
-              >
-                <div className="w-20 h-20 bg-white rounded-3xl shadow-lg flex items-center justify-center mb-4">
-                  <Smartphone className="w-10 h-10 text-[#1D1D1F]" />
+
+            <div className="grid md:grid-cols-2 gap-12 md:gap-24">
+              <div className="flex flex-col items-center">
+                <div className="w-32 h-32 md:w-40 md:h-40 bg-[#F8FAFC] rounded-[40px] shadow-neo border border-[#E4E7EC] flex items-center justify-center mb-10 group hover:shadow-neo-lg transition-all duration-500">
+                  <Smartphone className="w-16 h-16 md:w-20 md:h-20 text-[#101828] group-hover:scale-110 transition-transform" />
                 </div>
-                <span className="text-[#1D1D1F] font-bold">iOS / Android</span>
-                <span className="text-[#86868B] text-sm">即將推出</span>
-              </motion.div>
-              
-              <motion.div
-                className="flex flex-col items-center"
-                whileHover={{ scale: 1.05 }}
-              >
-                <div className="w-20 h-20 bg-white rounded-3xl shadow-lg flex items-center justify-center mb-4">
-                  <Monitor className="w-10 h-10 text-[#1D1D1F]" />
+                <h4 className="text-2xl font-bold text-[#101828] mb-4">Mobile Experience</h4>
+                <div className="px-4 py-1 rounded-full bg-[#E4E7EC] text-[#667085] text-xs font-bold font-mono tracking-widest uppercase mb-4">Coming Soon</div>
+                <p className="text-[#667085] font-medium leading-relaxed max-w-xs">
+                  專為行動端優化的 AI 試穿 App，隨手拍即刻體驗穿搭趣味。
+                </p>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <div className="w-32 h-32 md:w-40 md:h-40 bg-[#101828] rounded-[40px] shadow-neo border border-white/5 flex items-center justify-center mb-10 group hover:shadow-glow-blue transition-all duration-500">
+                  <Monitor className="w-16 h-16 md:w-20 md:h-20 text-white group-hover:scale-110 transition-transform" />
                 </div>
-                <span className="text-[#1D1D1F] font-bold">Web 版本</span>
-                <span className="text-[#86868B] text-sm">開發中</span>
-              </motion.div>
+                <h4 className="text-2xl font-bold text-[#101828] mb-4">B2B Dashboards</h4>
+                <div className="px-4 py-1 rounded-full bg-[#2563EB]/10 text-[#2563EB] text-xs font-bold font-mono tracking-widest uppercase mb-4">Early Beta</div>
+                <p className="text-[#667085] font-medium leading-relaxed max-w-xs">
+                  為電商平台量身打造的網頁端組件，無縫整合品牌管理系統。
+                </p>
+              </div>
             </div>
           </ScrollReveal>
         </div>
       </Section>
 
-      {/* Waitlist CTA */}
-      <Section id="waitlist" className="py-24 md:py-48 bg-[#1D1D1F] relative overflow-hidden">
+      {/* ============================================
+          WAITLIST — Dark Premium
+          ============================================ */}
+      <Section id="waitlist" className="py-28 md:py-56 bg-[#0A0A0B] relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,102,204,0.15)_0%,transparent_70%)]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(37,99,235,0.15)_0%,transparent_70%)] animate-mesh-float" />
+          <div className="absolute inset-0 dot-grid-dark opacity-40" />
         </div>
 
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <ScrollReveal direction="up">
-            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-[#86868B] mb-6">Early Access</h2>
-            <h3 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8">
-              搶先體驗
-              <br />
-              <span className="text-[#0066CC]">AI 虛擬試穿</span>
+            <h3 className="text-4xl md:text-8xl font-extrabold text-white tracking-tight mb-12">
+              搶先踏入<br />
+              <span className="text-gradient-blue">未來試衣間</span>
             </h3>
-            <p className="text-lg md:text-xl text-[#86868B] font-medium mb-12 max-w-xl mx-auto">
-              加入等候名單，成為首批體驗用戶，享有專屬早鳥優惠。
+            <p className="text-lg md:text-2xl text-[#98A2B3] font-medium mb-16 leading-relaxed max-w-2xl mx-auto">
+              加入我們的限量早鳥封測名單，成為第一批改變時尚購物方式的先行者。
             </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <AppleButton
-                variant="secondary"
-                size="lg"
-                className="!bg-white !text-[#1D1D1F] hover:!bg-[#F5F5F7] w-full sm:w-auto"
-                onClick={() => window.location.href = 'mailto:tryzeon.team@gmail.com?subject=申請加入等候名單'}
-              >
-                <Mail className="w-5 h-5 mr-2" />
-                加入等候名單
-              </AppleButton>
-              
-              <AppleLink 
-                href="/#features" 
-                className="!text-white"
-              >
-                了解更多功能
-              </AppleLink>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <div className="w-full sm:w-auto flex flex-col items-center">
+                <AppleButton
+                  variant="secondary"
+                  size="lg"
+                  className="!bg-white !text-[#101828] hover:!bg-[#F5F5F7] w-full sm:w-auto shadow-neo-lg"
+                  onClick={() => window.location.href = 'mailto:tryzeon.team@gmail.com?subject=申請加入早鳥封測'}
+                >
+                  <Mail className="w-5 h-5 mr-3" />
+                  申請加入封測名單
+                </AppleButton>
+                <div className="mt-4 text-[#667085] text-xs font-mono tracking-widest uppercase">Response within 24h</div>
+              </div>
             </div>
           </ScrollReveal>
         </div>

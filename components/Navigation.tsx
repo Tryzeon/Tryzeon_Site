@@ -21,10 +21,11 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      // 當滾動超過視窗高度（輪播圖高度）時，切換為黑色文字
+      // 當 hero 區塊頂部滾出視窗時，切換為白色背景
+      // 使用視窗高度作為閾值（當滾動距離超過視窗高度時，hero 區塊頂部已經離開視窗）
       const scrollPosition = window.scrollY;
       const viewportHeight = window.innerHeight;
-      setIsScrolled(scrollPosition > viewportHeight * 0.7);
+      setIsScrolled(scrollPosition > viewportHeight);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -54,42 +55,39 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
   };
 
   const navigationItems = [
-    { href: '#features', label: t.nav.product },
+    { href: '/products', label: t.nav.product },
+    { href: '/join', label: '加入我們' },
     { href: '#about', label: t.nav.about },
-    { href: '#partners', label: t.nav.partners },
     { href: '#faq', label: t.nav.faq },
     { href: '#contact', label: t.nav.contact }
   ];
 
   const productMenuItems = [
     { href: '/products', label: '完整產品介紹', desc: '深入了解所有功能' },
-    { href: '#features', label: 'AI 虛擬試穿', desc: '一鍵生成穿搭效果' },
-    { href: '#features', label: '動態影片生成', desc: '靜態照片轉動態影片' },
+    { href: '/experience', label: '立即體驗 AI', desc: '一鍵生成穿搭效果' },
+    { href: '/join', label: '加入創作者生態', desc: '展現時尚影響力' },
     { href: '#features', label: 'B2B 解決方案', desc: '企業級虛擬試穿服務' },
   ];
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] px-4 md:px-0 ${
-        isScrolled ? 'top-4 py-0' : 'top-0 py-4'
-      }`}
-    >
-      <div 
-        className={`max-w-7xl mx-auto transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-          shouldShowWhiteBackground
-            ? 'rounded-full bg-white/95 shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-white/20 saturate-150 px-6 py-2 max-w-5xl'
-            : 'px-6 md:px-12 xl:px-24 bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] px-4 md:px-0 ${isScrolled ? 'top-4 py-0' : 'top-0 py-5'
         }`}
+    >
+      <div
+        className={`max-w-7xl mx-auto transition-all duration-400 ease-out ${shouldShowWhiteBackground
+          ? 'rounded-full bg-white/80 backdrop-blur-2xl shadow-neo border border-[#E4E7EC]/60 px-8 py-2.5 max-w-5xl'
+          : 'px-6 md:px-12 xl:px-24 bg-transparent border border-transparent'
+          }`}
       >
         <div className="flex justify-between items-center h-12 md:h-14">
-          {/* Logo */}
+          {/* Logo - Modern tech style */}
           <a
             href="#"
-            className={`text-2xl md:text-3xl font-display font-bold tracking-tight transition-colors duration-300 ${
-              shouldShowWhiteBackground
-                ? 'text-[#1D1D1F]'
-                : 'text-white drop-shadow-md'
-            }`}
+            className={`text-2xl md:text-3xl font-extrabold tracking-tight transition-all duration-400 ${shouldShowWhiteBackground
+              ? 'text-[#101828] hover:text-[#2563EB]'
+              : 'text-white drop-shadow-md'
+              }`}
           >
             Tryzeon
           </a>
@@ -103,11 +101,10 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
               onMouseLeave={() => setShowProductMenu(false)}
             >
               <button
-                className={`flex items-center space-x-1.5 text-[13px] font-medium tracking-wide transition-colors duration-300 ${
-                  shouldShowWhiteBackground
-                    ? 'text-[#1D1D1F]/80 hover:text-[#0066CC]'
-                    : 'text-white/90 hover:text-white drop-shadow-sm'
-                }`}
+                className={`flex items-center space-x-1.5 text-[13px] font-medium tracking-wide transition-colors duration-300 ${shouldShowWhiteBackground
+                  ? 'text-[#1D1D1F]/80 hover:text-[#0066CC]'
+                  : 'text-white/90 hover:text-white drop-shadow-sm'
+                  }`}
               >
                 <span>{t.nav.product}</span>
                 <ChevronDown className="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" />
@@ -146,11 +143,10 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
                 key={item.href}
                 href={item.href}
                 onClick={scrollToSection}
-                className={`text-[13px] font-medium tracking-wide transition-colors duration-300 ${
-                  shouldShowWhiteBackground
-                    ? 'text-[#1D1D1F]/80 hover:text-[#0066CC]'
-                    : 'text-white/90 hover:text-white drop-shadow-sm'
-                }`}
+                className={`text-[13px] font-medium tracking-wide transition-colors duration-300 ${shouldShowWhiteBackground
+                  ? 'text-[#1D1D1F]/80 hover:text-[#0066CC]'
+                  : 'text-white/90 hover:text-white drop-shadow-sm'
+                  }`}
               >
                 {item.label}
               </a>
@@ -163,11 +159,10 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
             <div className="relative">
               <button
                 onClick={() => setShowLangMenu(!showLangMenu)}
-                className={`flex items-center space-x-1 text-[11px] font-semibold tracking-wide uppercase transition-colors duration-300 ${
-                  shouldShowWhiteBackground
-                    ? 'text-[#1D1D1F]/70 hover:text-[#1D1D1F]'
-                    : 'text-white/80 hover:text-white drop-shadow-sm'
-                }`}
+                className={`flex items-center space-x-1 text-[11px] font-semibold tracking-wide uppercase transition-colors duration-300 ${shouldShowWhiteBackground
+                  ? 'text-[#1D1D1F]/70 hover:text-[#1D1D1F]'
+                  : 'text-white/80 hover:text-white drop-shadow-sm'
+                  }`}
               >
                 <span>{currentLang === 'zh-TW' ? '繁中' : 'EN'}</span>
                 <ChevronDown className="w-3 h-3 opacity-70" />
@@ -201,13 +196,11 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
 
             {/* CTA Button */}
             <a
-              href="#contact"
-              onClick={scrollToSection}
-              className={`px-5 py-2 text-[12px] font-bold rounded-full transition-all duration-300 ${
-                shouldShowWhiteBackground
-                  ? 'bg-[#1D1D1F] text-white hover:bg-[#000000] hover:scale-105 shadow-md'
-                  : 'bg-white/10 border border-white/20 text-white hover:bg-white/20'
-              }`}
+              href="/experience"
+              className={`px-5 py-2 text-[12px] font-bold rounded-full transition-all duration-300 ${shouldShowWhiteBackground
+                ? 'bg-[#1D1D1F] text-white hover:bg-[#000000] hover:scale-105 shadow-md'
+                : 'bg-white/10 border border-white/20 text-white hover:bg-white/20'
+                }`}
             >
               {t.nav.getStarted}
             </a>
@@ -248,25 +241,23 @@ export function Navigation({ currentLang, setCurrentLang }: NavigationProps) {
                     {item.label}
                   </a>
                 ))}
-                
+
                 <div className="h-px bg-black/5 my-4 mx-4"></div>
-                
+
                 <div className="flex justify-between items-center px-4 py-2">
                   <span className="text-sm font-medium text-[#86868B]">Language</span>
                   <div className="flex bg-[#F5F5F7] rounded-full p-1">
-                    <button 
-                      onClick={() => setCurrentLang('zh-TW')} 
-                      className={`px-3 py-1 text-xs font-bold rounded-full transition-all ${
-                        currentLang === 'zh-TW' ? 'bg-white shadow-sm text-[#1D1D1F]' : 'text-[#86868B]'
-                      }`}
+                    <button
+                      onClick={() => setCurrentLang('zh-TW')}
+                      className={`px-3 py-1 text-xs font-bold rounded-full transition-all ${currentLang === 'zh-TW' ? 'bg-white shadow-sm text-[#1D1D1F]' : 'text-[#86868B]'
+                        }`}
                     >
                       繁中
                     </button>
-                    <button 
-                      onClick={() => setCurrentLang('en')} 
-                      className={`px-3 py-1 text-xs font-bold rounded-full transition-all ${
-                        currentLang === 'en' ? 'bg-white shadow-sm text-[#1D1D1F]' : 'text-[#86868B]'
-                      }`}
+                    <button
+                      onClick={() => setCurrentLang('en')}
+                      className={`px-3 py-1 text-xs font-bold rounded-full transition-all ${currentLang === 'en' ? 'bg-white shadow-sm text-[#1D1D1F]' : 'text-[#86868B]'
+                        }`}
                     >
                       EN
                     </button>

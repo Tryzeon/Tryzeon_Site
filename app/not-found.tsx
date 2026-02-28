@@ -11,14 +11,14 @@ export default function NotFound() {
             404
           </h1>
         </div>
-        
+
         <h2 className="text-3xl md:text-4xl font-bold text-[#1D1D1F] mb-4 tracking-tight -mt-16 md:-mt-24">
           找不到頁面
         </h2>
         <p className="text-[#86868B] text-lg mb-10 leading-relaxed max-w-md mx-auto">
           抱歉，您訪問的頁面不存在或已被移除。<br />讓我們帶您回到正確的方向。
         </p>
-        
+
         {/* 主要按鈕 */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
           <Link
@@ -39,7 +39,7 @@ export default function NotFound() {
 
         {/* 快速導航卡片 */}
         <div className="grid sm:grid-cols-3 gap-4">
-          <Link 
+          <Link
             href="/products"
             className="group p-6 bg-white rounded-2xl text-left hover:shadow-lg transition-all duration-300 border border-black/5"
           >
@@ -49,19 +49,19 @@ export default function NotFound() {
             <h3 className="font-semibold text-[#1D1D1F] mb-1">產品介紹</h3>
             <p className="text-sm text-[#86868B]">探索 AI 試穿功能</p>
           </Link>
-          
-          <Link 
-            href="/business"
+
+          <Link
+            href="/join"
             className="group p-6 bg-white rounded-2xl text-left hover:shadow-lg transition-all duration-300 border border-black/5"
           >
             <div className="w-10 h-10 bg-[#0066CC]/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#0066CC]/20 transition-colors">
               <Users className="w-5 h-5 text-[#0066CC]" />
             </div>
-            <h3 className="font-semibold text-[#1D1D1F] mb-1">商業合作</h3>
-            <p className="text-sm text-[#86868B]">品牌解決方案</p>
+            <h3 className="font-semibold text-[#1D1D1F] mb-1">加入我們</h3>
+            <p className="text-sm text-[#86868B]">成為時尚創作者</p>
           </Link>
-          
-          <a 
+
+          <a
             href="mailto:tryzeon.team@gmail.com"
             className="group p-6 bg-white rounded-2xl text-left hover:shadow-lg transition-all duration-300 border border-black/5"
           >

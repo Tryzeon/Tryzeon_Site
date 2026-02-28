@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   description: "一張照片即刻生成虛擬試穿影片。Tryzeon 運用 AI 技術提供虛擬試穿、動態影片生成、智慧穿搭推薦，重新定義時尚購物體驗。適用於服飾品牌與電商平台。",
   keywords: [
-    "AI 虛擬試穿", "虛擬換裝", "時尚科技", "Tryzeon", 
+    "AI 虛擬試穿", "虛擬換裝", "時尚科技", "Tryzeon",
     "AI 試穿技術", "電商解決方案", "服飾科技",
     "OOTD 推薦", "穿搭 AI", "動態試穿影片",
     "virtual try-on", "fashion tech", "AI fashion"
@@ -65,20 +65,14 @@ export const metadata: Metadata = {
     siteName: "Tryzeon",
     images: [
       {
-        url: "/og-image.jpg",
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: "Tryzeon - AI 虛擬試穿技術",
-        type: "image/jpeg",
-      },
-      {
-        url: "/og-image-square.jpg",
-        width: 800,
-        height: 800,
-        alt: "Tryzeon Logo",
-        type: "image/jpeg",
+        alt: 'Tryzeon - AI 虛擬試穿技術',
+        type: 'image/png',
       },
     ],
+
   },
   twitter: {
     card: "summary_large_image",
@@ -87,8 +81,8 @@ export const metadata: Metadata = {
     title: "Tryzeon - AI 虛擬試穿｜時尚科技新創",
     description: "一張照片即刻生成虛擬試穿影片，重新定義時尚購物體驗。",
     images: {
-      url: "/twitter-image.jpg",
-      alt: "Tryzeon - AI 虛擬試穿技術",
+      url: '/twitter-image',
+      alt: 'Tryzeon - AI 虛擬試穿技術',
     },
   },
   verification: {
@@ -197,16 +191,13 @@ export default function RootLayout({
       <head>
         {/* Preload critical pages */}
         <link rel="prefetch" href="/experience" as="document" />
-        <link rel="prefetch" href="/learn-more" as="document" />
-        <link rel="prefetch" href="/demo" as="document" />
-        <link rel="prefetch" href="/business" as="document" />
+        <link rel="prefetch" href="/products" as="document" />
         <link rel="prefetch" href="/join" as="document" />
-        <link rel="prefetch" href="/explore" as="document" />
-        
+
         {/* Preload critical images */}
         <link rel="preload" href="/images/slides/slide-hero.jpg" as="image" type="image/jpeg" />
         <link rel="preload" href="/brand-hero.jpg" as="image" type="image/jpeg" />
-        
+
         {/* Preload WebP images for modern browsers */}
         <link rel="preload" href="/images/slides/slide-hero.webp" as="image" type="image/webp" />
         {/* Preconnect to external domains */}

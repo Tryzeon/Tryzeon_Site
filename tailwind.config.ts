@@ -9,28 +9,31 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Luxury Fashion Color Palette
-        fashion: {
-          stone: '#F9F9F8',
-          charcoal: '#1A1A1A',
-          gold: '#D4AF37',
-          silver: '#E5E5E5',
-          beige: '#F5F5F0',
+        // Neo-Tech Color Palette
+        neo: {
+          white: '#FAFAFA',
+          ice: '#F2F4F7',
+          smoke: '#E4E7EC',
+          mist: '#98A2B3',
+          steel: '#667085',
+          ink: '#101828',
+          charcoal: '#0A0A0B',
+          blue: '#2563EB',
+          'blue-light': '#60A5FA',
+          'blue-deep': '#1D4ED8',
+          cyan: '#06B6D4',
+          violet: '#7C3AED',
         },
-        // Apple 液態玻璃色彩系統 (Refined)
-        glass: {
-          blue: '#007AFF',
-          purple: '#AF52DE',
-          pink: '#FF2D55',
-          orange: '#FF9500',
-          green: '#34C759',
-          teal: '#5AC8FA',
-          indigo: '#5856D6',
+        // Keep accent for backward compatibility
+        accent: {
+          blue: '#2563EB',
+          navy: '#1D4ED8',
+          teal: '#06B6D4',
         },
       },
       fontFamily: {
-        sans: ['var(--font-outfit)', 'Inter', 'sans-serif'],
-        serif: ['var(--font-playfair)', 'serif'],
+        sans: ['var(--font-outfit)', 'Inter', '-apple-system', 'sans-serif'],
+        mono: ['var(--font-mono)', 'JetBrains Mono', 'SF Mono', 'monospace'],
         display: ['var(--font-outfit)', 'sans-serif'],
       },
       fontSize: {
@@ -58,19 +61,24 @@ const config: Config = {
         '3xl': '64px',
       },
       boxShadow: {
-        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-        'glass-lg': '0 8px 32px 0 rgba(31, 38, 135, 0.25)',
+        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.12)',
+        'glass-lg': '0 8px 32px 0 rgba(31, 38, 135, 0.2)',
+        'neo': '0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06)',
+        'neo-md': '0 4px 12px rgba(0, 0, 0, 0.05), 0 16px 40px rgba(0, 0, 0, 0.08)',
+        'neo-lg': '0 8px 24px rgba(0, 0, 0, 0.06), 0 24px 64px rgba(0, 0, 0, 0.1)',
+        'neo-xl': '0 12px 40px rgba(0, 0, 0, 0.08), 0 48px 96px rgba(0, 0, 0, 0.12)',
+        'glow-blue': '0 0 40px rgba(37, 99, 235, 0.15), 0 0 80px rgba(37, 99, 235, 0.05)',
+        'glow-cyan': '0 0 40px rgba(6, 182, 212, 0.12), 0 0 80px rgba(6, 182, 212, 0.04)',
         'inner-glow': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.7)',
-        'apple': '0 4px 16px rgba(0, 0, 0, 0.12)',
-        'apple-lg': '0 12px 48px rgba(0, 0, 0, 0.18)',
       },
       animation: {
         'marquee': 'marquee 20s linear infinite',
-        'fade-in': 'fadeIn 0.4s ease-out',
+        'fade-in': 'fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
         'scale-in': 'scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         'float': 'float 6s ease-in-out infinite',
         'glow': 'glow 2s ease-in-out infinite alternate',
+        'mesh-float': 'meshFloat 12s ease-in-out infinite',
       },
       keyframes: {
         marquee: {
@@ -97,10 +105,14 @@ const config: Config = {
           '0%': { opacity: '0.5' },
           '100%': { opacity: '1' },
         },
+        meshFloat: {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '33%': { transform: 'translate(30px, -20px) scale(1.05)' },
+          '66%': { transform: 'translate(-20px, 15px) scale(0.98)' },
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-mesh': 'radial-gradient(at 40% 20%, hsla(28,100%,74%,0.3) 0px, transparent 50%), radial-gradient(at 80% 0%, hsla(189,100%,56%,0.3) 0px, transparent 50%), radial-gradient(at 0% 50%, hsla(355,100%,93%,0.3) 0px, transparent 50%), radial-gradient(at 80% 50%, hsla(340,100%,76%,0.3) 0px, transparent 50%), radial-gradient(at 0% 100%, hsla(22,100%,77%,0.3) 0px, transparent 50%), radial-gradient(at 80% 100%, hsla(242,100%,70%,0.3) 0px, transparent 50%), radial-gradient(at 0% 0%, hsla(343,100%,76%,0.3) 0px, transparent 50%)',
       },
     },
   },
