@@ -37,28 +37,28 @@ export default function TryzeonLanding() {
       </header>
 
       {/* ============================================
-          BRAND STATEMENT — Dark Mesh Section
+          BRAND STATEMENT — White Mesh Section
           ============================================ */}
-      <Section id="statement" className="py-28 md:py-56 bg-[#0A0A0B] relative overflow-hidden">
+      <Section id="statement" className="py-28 md:py-56 bg-[#ffffff] relative overflow-hidden">
         {/* Animated mesh gradient blobs */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-[10%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(37,99,235,0.12)_0%,transparent_70%)] animate-mesh-float" />
-          <div className="absolute bottom-0 right-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(6,182,212,0.08)_0%,transparent_70%)] animate-mesh-float [animation-delay:4s]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(124,58,237,0.06)_0%,transparent_70%)] animate-mesh-float [animation-delay:8s]" />
+          <div className="absolute top-0 left-[10%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(37,99,235,0.08)_0%,transparent_70%)] animate-mesh-float" />
+          <div className="absolute bottom-0 right-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(6,182,212,0.06)_0%,transparent_70%)] animate-mesh-float [animation-delay:4s]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(124,58,237,0.04)_0%,transparent_70%)] animate-mesh-float [animation-delay:8s]" />
           {/* Subtle dot grid overlay */}
-          <div className="absolute inset-0 dot-grid-dark" />
+          <div className="absolute inset-0 dot-grid" />
         </div>
 
         <div className="max-w-7xl mx-auto px-6 text-left relative z-10">
           <ParallaxText>
-            <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-extrabold text-white leading-[0.85] tracking-tighter mb-8 md:mb-16 flex flex-col uppercase">
+            <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-extrabold text-[#101828] leading-[0.85] tracking-tighter mb-8 md:mb-16 flex flex-col uppercase">
               <span className="z-10 relative">Digital</span>
-              <span className="text-outline-dark md:ml-24 xl:ml-48">Fashion</span>
+              <span className="text-outline md:ml-24 xl:ml-48">Fashion</span>
               <span className="text-gradient-blue md:ml-12 xl:ml-24">Evolution</span>
             </h2>
           </ParallaxText>
           <ScrollReveal direction="up" delay={0.2} className="md:w-1/2 md:ml-auto">
-            <p className="text-lg md:text-2xl text-[#98A2B3] font-medium leading-relaxed max-w-3xl mx-auto mb-10 md:mb-16 text-balance">
+            <p className="text-lg md:text-2xl text-[#475467] font-medium leading-relaxed max-w-3xl mx-auto mb-10 md:mb-16 text-balance">
               從試穿開始，重新定義你的時尚新生活。<br />整合線上與線下，打造時尚產業的 AI 基礎建設。
             </p>
             <div className="flex justify-center">
