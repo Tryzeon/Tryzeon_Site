@@ -122,67 +122,62 @@ export default function TryzeonLanding() {
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-[#101828] tracking-tight">為誰而設計</h2>
           </ScrollReveal>
 
-          <div className="flex flex-col gap-16 md:gap-32 mt-20">
-            {/* B2B - Staggered Left */}
-            <div className="md:w-10/12 xl:w-8/12">
-              <ScrollZoomCard>
-                <div className="group relative bg-[#0A0A0B] rounded-[2.5rem] p-8 md:p-16 h-full flex flex-col justify-between overflow-hidden border border-white/10 hover:border-[#2563EB]/40 shadow-neo-xl transition-all duration-700">
-                  {/* Blue gradient accent on hover */}
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle,rgba(37,99,235,0.15),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                  <div className="relative z-10 max-w-lg">
-                    <span className="text-[#98A2B3] text-xs md:text-sm font-mono font-medium uppercase tracking-widest mb-6 block border-b border-white/10 pb-4">01 // Brand Ecosystem</span>
-                    <h3 className="text-3xl md:text-6xl font-extrabold text-white mb-6 md:mb-10 leading-tight tracking-tight">低成本提升視覺<br /><span className="text-outline-dark">吸引力與轉換率</span></h3>
-                    <AppleButton
-                      variant="primary"
-                      size="lg"
-                      className="!bg-[#2563EB] hover:!bg-[#1D4ED8]"
-                      onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLScu_hKsOTUVcuB0R3sKnRh9cAbn7zchO7W8izdgG1N9-WC9AQ/viewform?usp=header', '_blank')}
-                    >
-                      品牌合作申請
-                    </AppleButton>
-                  </div>
-                  <div className="mt-12 md:mt-16 relative aspect-[21/9] rounded-2xl overflow-hidden shadow-2xl transition-transform duration-700 group-hover:scale-105 group-hover:-rotate-1">
-                    <Image
-                      src="/images/audience/b2b-fashion-store.jpg"
-                      alt="Fashion Boutique Store"
-                      fill
-                      className="object-cover mix-blend-luminosity opacity-80 group-hover:mix-blend-normal group-hover:opacity-100 transition-all duration-700"
-                      sizes="(max-width: 768px) 100vw, 80vw"
-                    />
-                  </div>
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            {/* B2B */}
+            <ScrollZoomCard>
+              <div className="group relative bg-white rounded-3xl p-8 md:p-12 h-full flex flex-col justify-between overflow-hidden border border-[#E4E7EC] hover:border-[#2563EB]/20 shadow-neo hover:shadow-neo-lg transition-all duration-500">
+                {/* Blue gradient accent on hover */}
+                <div className="absolute top-0 right-0 w-40 h-40 bg-[radial-gradient(circle,rgba(37,99,235,0.08),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10 max-w-md">
+                  <span className="text-[#98A2B3] text-xs md:text-sm font-mono font-medium uppercase tracking-widest mb-4 block">01 / Brand Solutions</span>
+                  <h3 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-[#101828] mb-6 md:mb-8 leading-tight">低成本提升視覺<br />吸引力與轉換率</h3>
+                  <AppleButton
+                    variant="primary"
+                    size="md"
+                    onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLScu_hKsOTUVcuB0R3sKnRh9cAbn7zchO7W8izdgG1N9-WC9AQ/viewform?usp=header', '_blank')}
+                  >
+                    品牌合作申請
+                  </AppleButton>
                 </div>
-              </ScrollZoomCard>
-            </div>
+                <div className="mt-8 md:mt-10 relative aspect-[16/9] rounded-2xl overflow-hidden shadow-neo-md transition-transform duration-500 group-hover:scale-[1.02]">
+                  <Image
+                    src="/images/audience/b2b-fashion-store.jpg"
+                    alt="Fashion Boutique Store"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+              </div>
+            </ScrollZoomCard>
 
-            {/* B2C - Staggered Right */}
-            <div className="md:w-10/12 xl:w-8/12 md:self-end">
-              <ScrollZoomCard>
-                <div className="group relative bg-white rounded-[2.5rem] p-8 md:p-16 h-full flex flex-col justify-between overflow-hidden border border-[#E4E7EC] hover:border-[#06B6D4]/40 shadow-neo hover:shadow-neo-xl transition-all duration-700">
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle,rgba(6,182,212,0.15),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                  <div className="relative z-10 max-w-lg">
-                    <span className="text-[#98A2B3] text-xs md:text-sm font-mono font-medium uppercase tracking-widest mb-6 block border-b border-black/10 pb-4">02 // Personal Utility</span>
-                    <h3 className="text-3xl md:text-6xl font-extrabold text-[#101828] mb-6 md:mb-10 leading-tight tracking-tight">告別試穿煩惱<br /><span className="text-outline">遇見最美的自己</span></h3>
-                    <AppleButton
-                      variant="secondary"
-                      size="lg"
-                      className="!bg-[#101828] !text-white hover:!bg-[#1D2939]"
-                      onClick={() => window.location.href = '/join'}
-                    >
-                      加入試用行列
-                    </AppleButton>
-                  </div>
-                  <div className="mt-12 md:mt-16 relative aspect-[21/9] rounded-2xl overflow-hidden shadow-2xl transition-transform duration-700 group-hover:scale-105 group-hover:rotate-1">
-                    <Image
-                      src="/images/audience/b2c-user-phone.jpg"
-                      alt="Mobile Fashion App"
-                      fill
-                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                      sizes="(max-width: 768px) 100vw, 80vw"
-                    />
-                  </div>
+            {/* B2C */}
+            <ScrollZoomCard>
+              <div className="group relative bg-white rounded-3xl p-8 md:p-12 h-full flex flex-col justify-between overflow-hidden border border-[#E4E7EC] hover:border-[#06B6D4]/20 shadow-neo hover:shadow-neo-lg transition-all duration-500">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-[radial-gradient(circle,rgba(6,182,212,0.08),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10 max-w-md">
+                  <span className="text-[#98A2B3] text-xs md:text-sm font-mono font-medium uppercase tracking-widest mb-4 block">02 / Personal Experience</span>
+                  <h3 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-[#101828] mb-6 md:mb-8 leading-tight">告別試穿煩惱<br />遇見最美的自己</h3>
+                  <AppleButton
+                    variant="secondary"
+                    size="md"
+                    className="!bg-[#101828] !text-white hover:!bg-[#1D2939]"
+                    onClick={() => window.location.href = '/join'}
+                  >
+                    加入試用行列
+                  </AppleButton>
                 </div>
-              </ScrollZoomCard>
-            </div>
+                <div className="mt-8 md:mt-10 relative aspect-[16/9] rounded-2xl overflow-hidden shadow-neo-md transition-transform duration-500 group-hover:scale-[1.02]">
+                  <Image
+                    src="/images/audience/b2c-user-phone.jpg"
+                    alt="Mobile Fashion App"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+              </div>
+            </ScrollZoomCard>
           </div>
         </div>
       </Section>
